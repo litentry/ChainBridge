@@ -6,7 +6,7 @@ package substrate
 import (
 	"testing"
 
-	"github.com/ChainSafe/chainbridge-utils/core"
+	"github.com/Phala-Network/chainbridge-utils/core"
 )
 
 func TestParseStartBlock(t *testing.T) {

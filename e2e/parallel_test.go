@@ -14,7 +14,7 @@ import (
 	ethtest "github.com/ChainSafe/ChainBridge/shared/ethereum/testing"
 	subutils "github.com/ChainSafe/ChainBridge/shared/substrate"
 	subtest "github.com/ChainSafe/ChainBridge/shared/substrate/testing"
-	"github.com/ChainSafe/chainbridge-utils/msg"
+	"github.com/Phala-Network/chainbridge-utils/msg"
 	log "github.com/ChainSafe/log15"
 	"github.com/centrifuge/go-substrate-rpc-client/signature"
 	"github.com/centrifuge/go-substrate-rpc-client/types"

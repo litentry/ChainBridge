@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	utils "github.com/ChainSafe/ChainBridge/shared/substrate"
-	"github.com/ChainSafe/chainbridge-utils/msg"
+	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/centrifuge/go-substrate-rpc-client/types"
 )
 
