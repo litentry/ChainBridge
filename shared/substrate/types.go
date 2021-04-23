@@ -22,3 +22,9 @@ type AssetId struct {
 	RegistryId RegistryId
 	TokenId    TokenId
 }
+
+type BlockRewardInfo struct {
+	Seed 		types.U256	`json:"seed"`
+    OnlineTarget 	types.U256	`json:"onlineTarget"`
+    ComputeTarget 	types.U256	`json:"computeTarget"`
+}

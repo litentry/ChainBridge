@@ -4,7 +4,7 @@
 package utils
 
 import (
-	events "github.com/ChainSafe/chainbridge-substrate-events"
+	events "github.com/Phala-Network/chainbridge-substrate-events"
 	"github.com/centrifuge/go-substrate-rpc-client/types"
 )
 
@@ -167,6 +167,19 @@ type EventRegistryTmp struct {
 	Phase  types.Phase
 	Hash   types.Hash
 	Topics []types.Hash
+
+}
+
+// emitted by phala mode
+type EventRewardSeed struct {
+	Phase  			types.Phase
+	BlockRewardInfo	BlockRewardInfo
+	Topics    		[]types.Hash
+}
+
+type PendingStakeApplied struct {
+	Phase  			types.Phase
+	Topics    		[]types.Hash
 }
 
 type Events struct {
@@ -199,4 +212,6 @@ type Events struct {
 	Registry_Mint                    []EventRegistryMint                   //nolint:stylecheck,golint
 	Registry_RegistryCreated         []EventRegistryRegistryCreated        //nolint:stylecheck,golint
 	Registry_RegistryTmp             []EventRegistryTmp                    //nolint:stylecheck,golint
+	Phala_RewardSeed		 		 []EventRewardSeed                     //nolint:stylecheck,golint
+	MiningStaking_PendingStakeApplied	[]PendingStakeApplied                     //nolint:stylecheck,golint
 }

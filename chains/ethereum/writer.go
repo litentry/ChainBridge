@@ -5,9 +5,9 @@ package ethereum
 
 import (
 	"github.com/ChainSafe/ChainBridge/bindings/Bridge"
-	"github.com/ChainSafe/chainbridge-utils/core"
-	metrics "github.com/ChainSafe/chainbridge-utils/metrics/types"
-	"github.com/ChainSafe/chainbridge-utils/msg"
+	"github.com/Phala-Network/chainbridge-utils/core"
+	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
+	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"
 )
 
