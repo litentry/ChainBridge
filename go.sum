@@ -48,6 +48,8 @@ github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210422063431-1e12
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210422063431-1e120582b377/go.mod h1:gxusrZBaKLpY/50EfBD7JsS0pd6mthyNKFgs6/T7dnA=
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210424052637-69bd7594c8ef h1:WYum5xhU8SMg0E8y4L0M7s6BFvkoLe7ATeFNQwnKkPU=
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210424052637-69bd7594c8ef/go.mod h1:gxusrZBaKLpY/50EfBD7JsS0pd6mthyNKFgs6/T7dnA=
+github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210502092846-93fc2cc68440 h1:oRPRyDfNrAQUTLyZ5uOsLN2xa6gZfJuPbVp5W4Fkrcc=
+github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210502092846-93fc2cc68440/go.mod h1:gxusrZBaKLpY/50EfBD7JsS0pd6mthyNKFgs6/T7dnA=
 github.com/Phala-Network/chainbridge-utils v1.0.6 h1:DV9dNnrsU7fRG49biyRlHsPLd9Augv9lepxnP581ixM=
 github.com/Phala-Network/chainbridge-utils v1.0.6/go.mod h1:T5cOZhxdY4x0DrE0EqOnMwAPE8d4bNGqiPfN16o1rzc=
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210422070737-f337bbbd67e9 h1:c4Hu++qvrCJNXxvJszfJXGTKrXzoaD88hYhVVkxoLhk=
@@ -665,6 +667,8 @@ golang.org/x/sys v0.0.0-20210421221651-33663a62ff08 h1:qyN5bV+96OX8pL78eXDuz6YlD
 golang.org/x/sys v0.0.0-20210421221651-33663a62ff08/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20210423185535-09eb48e85fd7 h1:iGu644GcxtEcrInvDsQRCwJjtCIOlT2V7IRt6ah2Whw=
 golang.org/x/sys v0.0.0-20210423185535-09eb48e85fd7/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20210426230700-d19ff857e887 h1:dXfMednGJh/SUUFjTLsWJz3P+TQt9qnR11GgeI3vWKs=
+golang.org/x/sys v0.0.0-20210426230700-d19ff857e887/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/term v0.0.0-20201117132131-f5c789dd3221/go.mod h1:Nr5EML6q2oocZ2LXRh80K7BxOlk5/8JxuGnuhpl+muw=
 golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1 h1:v+OssWQX+hTHEmOBgwxdZxK4zHq3yOs8F9J7mk0PY8E=
 golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=
