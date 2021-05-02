@@ -170,21 +170,12 @@ type EventRegistryTmp struct {
 
 }
 
-// emitted by phala mode
-type EventRewardSeed struct {
-	Phase  			types.Phase
-	BlockRewardInfo	BlockRewardInfo
-	Topics    		[]types.Hash
-}
-
-type PendingStakeApplied struct {
-	Phase  			types.Phase
-	Topics    		[]types.Hash
-}
-
 type Events struct {
 	types.EventRecords
-	events.Events
+	events.ChainBridgeEvents
+	events.BridgeTransferEvents
+	events.PhalaEvents
+	events.MiningStakingEvents
 	Erc721_Minted                    []EventErc721Minted                   //nolint:stylecheck,golint
 	Erc721_Transferred               []EventErc721Transferred              //nolint:stylecheck,golint
 	Erc721_Burned                    []EventErc721Burned                   //nolint:stylecheck,golint
@@ -212,6 +203,4 @@ type Events struct {
 	Registry_Mint                    []EventRegistryMint                   //nolint:stylecheck,golint
 	Registry_RegistryCreated         []EventRegistryRegistryCreated        //nolint:stylecheck,golint
 	Registry_RegistryTmp             []EventRegistryTmp                    //nolint:stylecheck,golint
-	Phala_RewardSeed		 		 []EventRewardSeed                     //nolint:stylecheck,golint
-	MiningStaking_PendingStakeApplied	[]PendingStakeApplied                     //nolint:stylecheck,golint
 }
