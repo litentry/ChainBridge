@@ -171,15 +171,15 @@ type EventRegistryTmp struct {
 
 // Events defined in substrate/frame/election-provider-multi-phase, would be removed once GSRPC add them
 type EventSolutionStored struct {
-	Phase   types.Phase
-	Account types.U8
-	Topics  []types.Hash
+	Phase       types.Phase
+	Computation types.U8
+	Topics      []types.Hash
 }
 
 type EventElectionFinalized struct {
-	Phase   types.Phase
-	Account types.U8
-	Topics  []types.Hash
+	Phase       types.Phase
+	Computation types.U8
+	Topics      []types.Hash
 }
 
 type EventRewarded struct {
