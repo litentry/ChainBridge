@@ -4,7 +4,7 @@
 package utils
 
 import (
-	"github.com/ChainSafe/ChainBridge/bindings/GenericHandler"
+	"github.com/Phala-Network/ChainBridge/bindings/GenericHandler"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ethereum/go-ethereum/common"
 )

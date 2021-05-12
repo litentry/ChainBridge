@@ -6,8 +6,8 @@ package utils
 import (
 	"math/big"
 
-	"github.com/ChainSafe/ChainBridge/bindings/ERC20Handler"
-	ERC20 "github.com/ChainSafe/ChainBridge/bindings/ERC20PresetMinterPauser"
+	"github.com/Phala-Network/ChainBridge/bindings/ERC20Handler"
+	ERC20 "github.com/Phala-Network/ChainBridge/bindings/ERC20PresetMinterPauser"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ethereum/go-ethereum/common"
 )

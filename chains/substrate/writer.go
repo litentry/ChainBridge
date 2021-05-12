@@ -11,7 +11,7 @@ import (
 
 	"github.com/Phala-Network/chainbridge-utils/core"
 
-	utils "github.com/ChainSafe/ChainBridge/shared/substrate"
+	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"

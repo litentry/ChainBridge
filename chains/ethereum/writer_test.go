@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ChainSafe/ChainBridge/bindings/Bridge"
-	utils "github.com/ChainSafe/ChainBridge/shared/ethereum"
-	ethtest "github.com/ChainSafe/ChainBridge/shared/ethereum/testing"
+	"github.com/Phala-Network/ChainBridge/bindings/Bridge"
+	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
+	ethtest "github.com/Phala-Network/ChainBridge/shared/ethereum/testing"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"
 	eth "github.com/ethereum/go-ethereum"

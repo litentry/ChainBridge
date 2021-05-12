@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/ChainSafe/ChainBridge/config"
+	"github.com/Phala-Network/ChainBridge/config"
 	"github.com/Phala-Network/chainbridge-utils/crypto"
 	"github.com/Phala-Network/chainbridge-utils/crypto/secp256k1"
 	"github.com/Phala-Network/chainbridge-utils/crypto/sr25519"

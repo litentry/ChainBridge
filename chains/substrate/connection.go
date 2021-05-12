@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"sync"
 
-	utils "github.com/ChainSafe/ChainBridge/shared/substrate"
+	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"
 	gsrpc "github.com/centrifuge/go-substrate-rpc-client/v3"
