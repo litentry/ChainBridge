@@ -3,7 +3,7 @@
 /*
 Provides the command-line interface for the chainbridge application.
 
-For configuration and CLI commands see the README: https://github.com/ChainSafe/ChainBridge.
+For configuration and CLI commands see the README: https://github.com/Phala-Network/ChainBridge.
 */
 package main
 
@@ -15,9 +15,9 @@ import (
 
 	"strconv"
 
-	"github.com/ChainSafe/ChainBridge/chains/ethereum"
-	"github.com/ChainSafe/ChainBridge/chains/substrate"
-	"github.com/ChainSafe/ChainBridge/config"
+	"github.com/Phala-Network/ChainBridge/chains/ethereum"
+	"github.com/Phala-Network/ChainBridge/chains/substrate"
+	"github.com/Phala-Network/ChainBridge/config"
 	"github.com/Phala-Network/chainbridge-utils/core"
 	"github.com/Phala-Network/chainbridge-utils/metrics/health"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
