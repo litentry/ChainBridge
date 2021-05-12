@@ -135,6 +135,8 @@ func (w *writer) createNonFungibleProposal(m msg.Message) (*proposal, error) {
 }
 
 func (w *writer) createGenericProposal(m msg.Message) (*proposal, error) {
+	metadata := types.Bytes(m.Payload[0].([]byte))
+
 	meta := w.conn.getMetadata()
 	method, err := w.resolveResourceId(m.ResourceId)
 	if err != nil {
@@ -144,7 +146,7 @@ func (w *writer) createGenericProposal(m msg.Message) (*proposal, error) {
 	call, err := types.NewCall(
 		&meta,
 		method,
-		types.NewHash(m.Payload[0].([]byte)),
+		metadata,
 	)
 	if err != nil {
 		return nil, err
