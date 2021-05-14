@@ -206,10 +206,20 @@ type EventUnsignedPhaseStarted struct {
 	Topics []types.Hash
 }
 
-type EventLotteryCommand struct {
-	Phase  types.Phase
-	Round  types.Bytes
-	Topics []types.Hash
+type EventLotteryNewround struct {
+	Phase       types.Phase
+	RoundID     types.U32
+	TotalCount  types.U32
+	WinnerCount types.U32
+	Topics      []types.Hash
+}
+
+type EventLotteryOpenbox struct {
+	Phase      types.Phase
+	RoundID    types.U32
+	TokenId    types.U32
+	BtcAddress types.Bytes
+	Topics     []types.Hash
 }
 
 type EventBTCSignedTxSend struct {
@@ -259,6 +269,7 @@ type Events struct {
 	ElectionProviderMultiPhase_Slashed              []EventSlashed                        //nolint:stylecheck,golint
 	ElectionProviderMultiPhase_SignedPhaseStarted   []EventSignedPhaseStarted             //nolint:stylecheck,golint
 	ElectionProviderMultiPhase_UnsignedPhaseStarted []EventUnsignedPhaseStarted           //nolint:stylecheck,golint
-	BridgeTransfer_LotteryCommand                   []EventLotteryCommand                 //nolint:stylecheck,golint
+	BridgeTransfer_LotteryNewround                  []EventLotteryNewround                //nolint:stylecheck,golint
+	BridgeTransfer_LotteryOpenbox                   []EventLotteryOpenbox                 //nolint:stylecheck,golint
 	BridgeTransfer_BTCSignedTxSend                  []EventBTCSignedTxSend                //nolint:stylecheck,golint
 }
