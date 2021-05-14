@@ -206,7 +206,7 @@ type EventUnsignedPhaseStarted struct {
 	Topics []types.Hash
 }
 
-type EventLotteryNewround struct {
+type EventLotteryNewRound struct {
 	Phase       types.Phase
 	RoundID     types.U32
 	TotalCount  types.U32
@@ -214,7 +214,7 @@ type EventLotteryNewround struct {
 	Topics      []types.Hash
 }
 
-type EventLotteryOpenbox struct {
+type EventLotteryOpenBox struct {
 	Phase      types.Phase
 	RoundID    types.U32
 	TokenId    types.U32
@@ -269,7 +269,7 @@ type Events struct {
 	ElectionProviderMultiPhase_Slashed              []EventSlashed                        //nolint:stylecheck,golint
 	ElectionProviderMultiPhase_SignedPhaseStarted   []EventSignedPhaseStarted             //nolint:stylecheck,golint
 	ElectionProviderMultiPhase_UnsignedPhaseStarted []EventUnsignedPhaseStarted           //nolint:stylecheck,golint
-	BridgeTransfer_LotteryNewround                  []EventLotteryNewround                //nolint:stylecheck,golint
-	BridgeTransfer_LotteryOpenbox                   []EventLotteryOpenbox                 //nolint:stylecheck,golint
+	BridgeTransfer_LotteryNewRound                  []EventLotteryNewRound                //nolint:stylecheck,golint
+	BridgeTransfer_LotteryOpenBox                   []EventLotteryOpenBox                 //nolint:stylecheck,golint
 	BridgeTransfer_BTCSignedTxSend                  []EventBTCSignedTxSend                //nolint:stylecheck,golint
 }
