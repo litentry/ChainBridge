@@ -9,7 +9,7 @@ import (
 
 	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
+	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 )
 
 // WARNING: THIS METHOD IS UNSAFE AND MAY PANIC

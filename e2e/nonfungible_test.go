@@ -12,7 +12,7 @@ import (
 	ethtest "github.com/Phala-Network/ChainBridge/shared/ethereum/testing"
 	subtest "github.com/Phala-Network/ChainBridge/shared/substrate/testing"
 	log "github.com/ChainSafe/log15"
-	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
+	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 )
 
 func testErc721ToSubstrateRoundTrip(t *testing.T, ctx *testContext) {

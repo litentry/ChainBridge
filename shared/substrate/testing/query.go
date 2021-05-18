@@ -10,7 +10,7 @@ import (
 
 	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/ChainSafe/log15"
-	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
+	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 )
 
 func QueryStorage(t *testing.T, client *utils.Client, prefix, method string, arg1, arg2 []byte, result interface{}) bool {

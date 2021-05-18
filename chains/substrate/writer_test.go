@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
+	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 
 	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	subtest "github.com/Phala-Network/ChainBridge/shared/substrate/testing"
