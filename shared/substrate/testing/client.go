@@ -11,8 +11,8 @@ import (
 	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"
-	"github.com/centrifuge/go-substrate-rpc-client/v3/signature"
-	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
+	"github.com/Phala-Network/go-substrate-rpc-client/v3/signature"
+	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 )
 
 func CreateClient(t *testing.T, key *signature.KeyringPair, endpoint string) *utils.Client {

@@ -14,7 +14,7 @@ import (
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"
-	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
+	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 )
 
 const TestSubEndpoint = "ws://localhost:9944"
