@@ -6,7 +6,7 @@ require (
 	github.com/ChainSafe/log15 v1.0.0
 	github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210518120540-ca718f6f6ca8 // indirect
 	github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210518120820-a7ebde21c7a5 // indirect
-	github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210518082416-24a737104101 // indirect
+	github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210520070450-7dd56d4ab34e // indirect
 	github.com/deckarep/golang-set v1.7.1 // indirect
 	github.com/ethereum/go-ethereum v1.10.3
 	github.com/huin/goupnp v1.0.1-0.20210310174557-0ca763054c88 // indirect
