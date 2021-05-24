@@ -60,6 +60,8 @@ github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210518120540-ca71
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210518120540-ca718f6f6ca8/go.mod h1:mMMLzH7ZzwaV1EYakjwh3oGMH2HYyex+KKnyOQJQAFk=
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210521090215-0d7c033e3b61 h1:rr1homg2soOQIdfvlnUBiBJfbB6R/XrZMV7IVsBDXC8=
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210521090215-0d7c033e3b61/go.mod h1:BEea1FkEGx7YlVpTVtdjby60C3NgXHs79bUsqaH7W50=
+github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210524071049-dfdf1668a1ae h1:FlY9ifUxfzJ2JlvbNVMIX4F6yz01f1dHTGsiGmC4ptk=
+github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210524071049-dfdf1668a1ae/go.mod h1:STUTnn9fGdcRHnxZ4IFAYqIZKgnfIaR204O+9yv62kw=
 github.com/Phala-Network/chainbridge-utils v1.0.6 h1:DV9dNnrsU7fRG49biyRlHsPLd9Augv9lepxnP581ixM=
 github.com/Phala-Network/chainbridge-utils v1.0.6/go.mod h1:T5cOZhxdY4x0DrE0EqOnMwAPE8d4bNGqiPfN16o1rzc=
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210422070737-f337bbbd67e9 h1:c4Hu++qvrCJNXxvJszfJXGTKrXzoaD88hYhVVkxoLhk=
@@ -74,6 +76,8 @@ github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210518120820-a7ebde21c7a5 
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210518120820-a7ebde21c7a5/go.mod h1:YEorXp+MTj8Tp0wwMSe+hAg3DK2yfaBpu16C+Wzq33A=
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210521090309-057c8b382375 h1:KkbDwkYXgBX01p2JJ5ph/1xipJHqLsvYvhEIOz+722o=
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210521090309-057c8b382375/go.mod h1:jjCvJyVroIslI3YoJKAIReLP/VGNFojOgqYlzMQ2h+g=
+github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210524071129-54237d839a07 h1:l7oHI9NRwVZpEjpeVEoXDthPTpk6kFJan4dypGM5mZE=
+github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210524071129-54237d839a07/go.mod h1:skWfBFRyP03pf78bwDgLkX6yGtMuYhhO6Wkw6yFINkQ=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210518030814-ec37d8ed480e h1:/sKQkEFNt0+T9uZ0z6fBv36Rlb8RQjThb0V9Cqe82gg=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210518030814-ec37d8ed480e/go.mod h1:4+N2ToJXAhbOfLhZfjH1+NuH+DQRYGBvu8wC5Z9x9zk=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210518033235-932bec39fd0a h1:fhkqZTXm7snBIOWUP5sXYW37Ke3luqt8jPzEJLWFAuk=
@@ -86,6 +90,8 @@ github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210520070450-7dd5
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210520070450-7dd56d4ab34e/go.mod h1:+e4sog3+Azc8sH/ELGVcY8Cz0viGxzNZuqAV6LWhFKE=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210521085432-231b6f179eb3 h1:NHRHh2mWVhovC9/uYjoTBIZF2OwCSL4w3IOFv/LJBZ4=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210521085432-231b6f179eb3/go.mod h1:+e4sog3+Azc8sH/ELGVcY8Cz0viGxzNZuqAV6LWhFKE=
+github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210524070706-e789634da81b h1:AgcWDkyNXWhxwjsZzv+qfUlzilpsH3e9khXaMNaQCEQ=
+github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210524070706-e789634da81b/go.mod h1:+e4sog3+Azc8sH/ELGVcY8Cz0viGxzNZuqAV6LWhFKE=
 github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6 h1:fLjPD/aNc3UIOA6tDi6QXUemppXK3P9BI7mr2hd6gx8=
 github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6/go.mod h1:3eOhrUMpNV+6aFIbp5/iudMxNCF27Vw2OZgy4xEx0Fg=
 github.com/VictoriaMetrics/fastcache v1.5.3/go.mod h1:+jv9Ckb+za/P1ZRg/sulP5Ni1v49daAVERr0H3CuscE=
@@ -717,6 +723,8 @@ golang.org/x/sys v0.0.0-20210514084401-e8d321eab015 h1:hZR0X1kPW+nwyJ9xRxqZk1vx5
 golang.org/x/sys v0.0.0-20210514084401-e8d321eab015/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20210521090106-6ca3eb03dfc2 h1:48AqIJLs69Wmc3mA52aIcqt544rjrDCqolKAv7L8leA=
 golang.org/x/sys v0.0.0-20210521090106-6ca3eb03dfc2/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.0.0-20210521203332-0cec03c779c1 h1:lCnv+lfrU9FRPGf8NeRuWAAPjNnema5WtBinMgs1fD8=
+golang.org/x/sys v0.0.0-20210521203332-0cec03c779c1/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/term v0.0.0-20201117132131-f5c789dd3221/go.mod h1:Nr5EML6q2oocZ2LXRh80K7BxOlk5/8JxuGnuhpl+muw=
 golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1 h1:v+OssWQX+hTHEmOBgwxdZxK4zHq3yOs8F9J7mk0PY8E=
 golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=
