@@ -169,107 +169,37 @@ type EventRegistryTmp struct {
 	Topics []types.Hash
 }
 
-// Events defined in substrate/frame/election-provider-multi-phase, would be removed once GSRPC add them
-type EventSolutionStored struct {
-	Phase       types.Phase
-	Computation types.U8
-	Topics      []types.Hash
-}
-
-type EventElectionFinalized struct {
-	Phase       types.Phase
-	Computation types.U8
-	Topics      []types.Hash
-}
-
-type EventRewarded struct {
-	Phase   types.Phase
-	Account types.AccountID
-	Topics  []types.Hash
-}
-
-type EventSlashed struct {
-	Phase   types.Phase
-	Account types.AccountID
-	Topics  []types.Hash
-}
-
-type EventSignedPhaseStarted struct {
-	Phase  types.Phase
-	Round  types.U32
-	Topics []types.Hash
-}
-
-type EventUnsignedPhaseStarted struct {
-	Phase  types.Phase
-	Round  types.U32
-	Topics []types.Hash
-}
-
-type EventLotteryNewRound struct {
-	Phase       types.Phase
-	RoundID     types.U32
-	TotalCount  types.U32
-	WinnerCount types.U32
-	Topics      []types.Hash
-}
-
-type EventLotteryOpenBox struct {
-	Phase      types.Phase
-	RoundID    types.U32
-	TokenId    types.U32
-	BtcAddress types.Bytes
-	Topics     []types.Hash
-}
-
-type EventBTCSignedTxSend struct {
-	Phase      types.Phase
-	ChainId    types.U8
-	ResourceId types.Bytes32
-	Payload    types.Bytes
-	Topics     []types.Hash
-}
-
 type Events struct {
 	types.EventRecords
 	events.ChainBridgeEvents
 	events.BridgeTransferEvents
 	events.PhalaEvents
 	events.MiningStakingEvents
-	Erc721_Minted                                   []EventErc721Minted                   //nolint:stylecheck,golint
-	Erc721_Transferred                              []EventErc721Transferred              //nolint:stylecheck,golint
-	Erc721_Burned                                   []EventErc721Burned                   //nolint:stylecheck,golint
-	Example_Remark                                  []EventExampleRemark                  //nolint:stylecheck,golint
-	Nfts_DepositAsset                               []EventNFTDeposited                   //nolint:stylecheck,golint
-	Council_Proposed                                []types.EventCollectiveProposed       //nolint:stylecheck,golint
-	Council_Voted                                   []types.EventCollectiveVoted          //nolint:stylecheck,golint
-	Council_Approved                                []types.EventCollectiveApproved       //nolint:stylecheck,golint
-	Council_Disapproved                             []types.EventCollectiveDisapproved    //nolint:stylecheck,golint
-	Council_Executed                                []types.EventCollectiveExecuted       //nolint:stylecheck,golint
-	Council_MemberExecuted                          []types.EventCollectiveMemberExecuted //nolint:stylecheck,golint
-	Council_Closed                                  []types.EventCollectiveClosed         //nolint:stylecheck,golint
-	Fees_FeeChanged                                 []EventFeeChanged                     //nolint:stylecheck,golint
-	MultiAccount_NewMultiAccount                    []EventNewMultiAccount                //nolint:stylecheck,golint
-	MultiAccount_MultiAccountUpdated                []EventMultiAccountUpdated            //nolint:stylecheck,golint
-	MultiAccount_MultiAccountRemoved                []EventMultiAccountRemoved            //nolint:stylecheck,golint
-	MultiAccount_NewMultisig                        []EventNewMultisig                    //nolint:stylecheck,golint
-	MultiAccount_MultisigApproval                   []EventMultisigApproval               //nolint:stylecheck,golint
-	MultiAccount_MultisigExecuted                   []EventMultisigExecuted               //nolint:stylecheck,golint
-	MultiAccount_MultisigCancelled                  []EventMultisigCancelled              //nolint:stylecheck,golint
-	TreasuryReward_TreasuryMinting                  []EventTreasuryMinting                //nolint:stylecheck,golint
-	Nft_Transferred                                 []EventNftTransferred                 //nolint:stylecheck,golint
-	RadClaims_Claimed                               []EventRadClaimsClaimed               //nolint:stylecheck,golint
-	RadClaims_RootHashStored                        []EventRadClaimsRootHashStored        //nolint:stylecheck,golint
-	Registry_Mint                                   []EventRegistryMint                   //nolint:stylecheck,golint
-	Registry_RegistryCreated                        []EventRegistryRegistryCreated        //nolint:stylecheck,golint
-	Registry_RegistryTmp                            []EventRegistryTmp                    //nolint:stylecheck,golint
-	ElectionProviderMultiPhase_SolutionStored       []EventSolutionStored                 //nolint:stylecheck,golint
-	ElectionProviderMultiPhase_ElectionFinalized    []EventElectionFinalized              //nolint:stylecheck,golint
-	ElectionProviderMultiPhase_Rewarded             []EventRewarded                       //nolint:stylecheck,golint
-	ElectionProviderMultiPhase_Slashed              []EventSlashed                        //nolint:stylecheck,golint
-	ElectionProviderMultiPhase_SignedPhaseStarted   []EventSignedPhaseStarted             //nolint:stylecheck,golint
-	ElectionProviderMultiPhase_UnsignedPhaseStarted []EventUnsignedPhaseStarted           //nolint:stylecheck,golint
-	BridgeTransfer_LotteryNewRound                  []EventLotteryNewRound                //nolint:stylecheck,golint
-	BridgeTransfer_LotteryOpenBox                   []EventLotteryOpenBox                 //nolint:stylecheck,golint
-	BridgeTransfer_BTCSignedTxSend                  []EventBTCSignedTxSend                //nolint:stylecheck,golint
+	Erc721_Minted                    []EventErc721Minted                   //nolint:stylecheck,golint
+	Erc721_Transferred               []EventErc721Transferred              //nolint:stylecheck,golint
+	Erc721_Burned                    []EventErc721Burned                   //nolint:stylecheck,golint
+	Example_Remark                   []EventExampleRemark                  //nolint:stylecheck,golint
+	Nfts_DepositAsset                []EventNFTDeposited                   //nolint:stylecheck,golint
+	Council_Proposed                 []types.EventCollectiveProposed       //nolint:stylecheck,golint
+	Council_Voted                    []types.EventCollectiveVoted          //nolint:stylecheck,golint
+	Council_Approved                 []types.EventCollectiveApproved       //nolint:stylecheck,golint
+	Council_Disapproved              []types.EventCollectiveDisapproved    //nolint:stylecheck,golint
+	Council_Executed                 []types.EventCollectiveExecuted       //nolint:stylecheck,golint
+	Council_MemberExecuted           []types.EventCollectiveMemberExecuted //nolint:stylecheck,golint
+	Council_Closed                   []types.EventCollectiveClosed         //nolint:stylecheck,golint
+	Fees_FeeChanged                  []EventFeeChanged                     //nolint:stylecheck,golint
+	MultiAccount_NewMultiAccount     []EventNewMultiAccount                //nolint:stylecheck,golint
+	MultiAccount_MultiAccountUpdated []EventMultiAccountUpdated            //nolint:stylecheck,golint
+	MultiAccount_MultiAccountRemoved []EventMultiAccountRemoved            //nolint:stylecheck,golint
+	MultiAccount_NewMultisig         []EventNewMultisig                    //nolint:stylecheck,golint
+	MultiAccount_MultisigApproval    []EventMultisigApproval               //nolint:stylecheck,golint
+	MultiAccount_MultisigExecuted    []EventMultisigExecuted               //nolint:stylecheck,golint
+	MultiAccount_MultisigCancelled   []EventMultisigCancelled              //nolint:stylecheck,golint
+	TreasuryReward_TreasuryMinting   []EventTreasuryMinting                //nolint:stylecheck,golint
+	Nft_Transferred                  []EventNftTransferred                 //nolint:stylecheck,golint
+	RadClaims_Claimed                []EventRadClaimsClaimed               //nolint:stylecheck,golint
+	RadClaims_RootHashStored         []EventRadClaimsRootHashStored        //nolint:stylecheck,golint
+	Registry_Mint                    []EventRegistryMint                   //nolint:stylecheck,golint
+	Registry_RegistryCreated         []EventRegistryRegistryCreated        //nolint:stylecheck,golint
+	Registry_RegistryTmp             []EventRegistryTmp                    //nolint:stylecheck,golint
 }
