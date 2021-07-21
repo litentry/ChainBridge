@@ -74,6 +74,8 @@ github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210602083217-f6ee
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210602083217-f6ee84731a54/go.mod h1:TEOz5aZjH1lNYy5AAyOnZCSR25lUsoxEnktFemyTkJc=
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210603052045-6b826189bee7 h1:Qjp+33DSvXDLtpZDgze53F78s+w3YQ9LJBW+q9q5EBk=
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210603052045-6b826189bee7/go.mod h1:TEOz5aZjH1lNYy5AAyOnZCSR25lUsoxEnktFemyTkJc=
+github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210721074135-99e4f5ed4c2a h1:BQFLf7R8nWpAdFZah5Y2QU9cS/Uk5zoeBOj0irca/4A=
+github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210721074135-99e4f5ed4c2a/go.mod h1:TEOz5aZjH1lNYy5AAyOnZCSR25lUsoxEnktFemyTkJc=
 github.com/Phala-Network/chainbridge-utils v1.0.6 h1:DV9dNnrsU7fRG49biyRlHsPLd9Augv9lepxnP581ixM=
 github.com/Phala-Network/chainbridge-utils v1.0.6/go.mod h1:T5cOZhxdY4x0DrE0EqOnMwAPE8d4bNGqiPfN16o1rzc=
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210422070737-f337bbbd67e9 h1:c4Hu++qvrCJNXxvJszfJXGTKrXzoaD88hYhVVkxoLhk=

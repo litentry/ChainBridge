@@ -174,7 +174,6 @@ type Events struct {
 	events.ChainBridgeEvents
 	events.BridgeTransferEvents
 	events.PhalaEvents
-	events.MiningStakingEvents
 	events.KittiesEvents
 	Erc721_Minted                    []EventErc721Minted                   //nolint:stylecheck,golint
 	Erc721_Transferred               []EventErc721Transferred              //nolint:stylecheck,golint
