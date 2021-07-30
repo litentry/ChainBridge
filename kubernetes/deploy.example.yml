@@ -1,0 +1,83 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: blockstore-pvc
+  namespace: chainbridge-relay
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 128Mi
+  storageClassName: longhorn
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: blockstore-pvc
+  namespace: chainbridge-relay
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 128Mi
+  storageClassName: longhorn
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chainbridge
+  namespace: chainbridge-relay
+spec:
+  selector:
+    matchLabels:
+      app: chainbridge
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: chainbridge
+    spec:
+      containers:
+        - name: chainbridge
+          image: phala/chainbridge
+          command:
+            - /bridge
+            - --blockstore
+            - /blockstore
+            - --config
+            - /config/config.json
+          env:
+            - name: KEYSTORE_PASSWORD
+              value: password
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "0"
+              cpu: "0"
+          volumeMounts:
+            - name: blockstore
+              mountPath: /blockstore
+            - name: config
+              mountPath: /config
+              readOnly: true
+            - name: relayer-keys
+              mountPath: /keys
+              readOnly: true
+      volumes:
+        - name: blockstore
+          persistentVolumeClaim:
+            claimName: blockstore-pvc
+        - name: config
+          configMap:
+            name: config
+        - name: relayer-keys
+          secret:
+            secretName: relayer-keys

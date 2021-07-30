@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: config
+    namespace: chainbridge-relay
+data:
+    config.json: |+
+        {
+            "chains": [
+                {
+                    "name": "eth",
+                    "type": "ethereum",
+                    "id": "0",
+                    "endpoint": "wss://kovan.infura.io/ws/v3/API_KEY",
+                    "from": "0x2e2fCE6383C5C5ebA909Df0ea1b254F6Ca3D72B7",
+                    "opts": {
+                        "bridge": "0xe5F54e020f3E4964Ba11D269Cdda602A78d09917",
+                        "erc20Handler": "0xDf2E83f33dB8A9CcF3a00FCe18C3F509b974353D",
+                        "erc721Handler": "0xBe7F3e00499Ef54AA55f568DACf068F271250700",
+                        "genericHandler": "0x635eA86804200F80C16ea8EdDc3c749a54a9C37D",
+                        "gasLimit": "8000000",
+                        "startBlock": "25575042",
+                        "maxGasPrice": "3000000000",
+                        "blockConfirmations": "10"
+                    }
+                },
+                {
+                    "name": "sub",
+                    "type": "substrate",
+                    "id": "1",
+                    "endpoint": "wss://khala-dev.maho.science/ws",
+                    "from": "5CJaf3VVikbHvAQz5Lfd443yJZYb6hU2CX7ZDTC1QYMqTnfS",
+                    "opts": {
+                        "useExtendedCall": "true"
+                    }
+                }
+            ]
+        }
