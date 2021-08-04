@@ -5,9 +5,9 @@ go 1.15
 require (
 	github.com/ChainSafe/go-schnorrkel v0.0.0-20210527232834-58622d036665 // indirect
 	github.com/ChainSafe/log15 v1.0.0
-	github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210728140122-81e67a06614a // indirect
-	github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210722081307-39502dd2d7ca // indirect
-	github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210722080745-98d30b168516 // indirect
+	github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210804014450-b1156e216afc // indirect
+	github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210804014249-fdc4d9884389 // indirect
+	github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210804013814-0b8d04961cfc // indirect
 	github.com/deckarep/golang-set v1.7.1 // indirect
 	github.com/huin/goupnp v1.0.1-0.20210310174557-0ca763054c88 // indirect
 	github.com/kr/text v0.2.0 // indirect
