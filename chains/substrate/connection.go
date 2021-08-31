@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/ChainSafe/log15"
 	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/ChainSafe/log15"
 	gsrpc "github.com/Phala-Network/go-substrate-rpc-client/v3"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/rpc/author"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/signature"
@@ -200,7 +200,7 @@ func (c *Connection) getConst(prefix, name string, res interface{}) error {
 
 func (c *Connection) checkChainId(expected msg.ChainId) error {
 	var actual msg.ChainId
-	err := c.getConst(utils.BridgePalletName, "ChainIdentity", &actual)
+	err := c.getConst(utils.BridgePalletName, "BridgeChainId", &actual)
 	if err != nil {
 		return err
 	}
