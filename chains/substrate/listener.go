@@ -9,12 +9,13 @@ import (
 	"math/big"
 	"time"
 
+	"github.com/ChainSafe/log15"
 	"github.com/Phala-Network/ChainBridge/chains"
 	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
+	events "github.com/Phala-Network/chainbridge-substrate-events"
 	"github.com/Phala-Network/chainbridge-utils/blockstore"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/ChainSafe/log15"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 )
 
@@ -154,9 +155,9 @@ func (l *listener) pollBlocks() error {
 				continue
 			}
 
-			err = l.processEvents(hash)
+			err = l.processBridgeTransfer(hash)
 			if err != nil {
-				l.log.Error("Failed to process events in block", "block", currentBlock, "err", err)
+				l.log.Error("Failed to process bridge transfer in block", "block", currentBlock, "err", err)
 				retry--
 				continue
 			}
@@ -178,6 +179,62 @@ func (l *listener) pollBlocks() error {
 			retry = BlockRetryLimit
 		}
 	}
+}
+
+// processBridgeTransfer filter bridge transfer data from onchain storage and wrap it into relevant events
+func (l *listener) processBridgeTransfer(hash types.Hash) error {
+	l.log.Trace("Fetching storage for bridge transfer", "hash", hash.Hex())
+	meta := l.conn.getMetadata()
+	key, err := types.CreateStorageKey(&meta, "ChainBridge", "BridgeEvents", nil, nil)
+	if err != nil {
+		return err
+	}
+
+	var bridgeTransfers BridgeTransfers
+	_, err = l.conn.api.RPC.State.GetStorage(key, &bridgeTransfers, hash)
+	if err != nil {
+		return err
+	}
+
+	e := utils.Events{}
+	transferNum := len(bridgeTransfers)
+	for i := 0; i < transferNum; i++ {
+		if bridgeTransfers[i].IsFungible {
+			data := events.EventFungibleTransfer{}
+			data.Destination = bridgeTransfers[i].FungibleTransfer.Destination
+			data.DepositNonce = bridgeTransfers[i].FungibleTransfer.DepositNonce
+			data.ResourceId = bridgeTransfers[i].FungibleTransfer.ResourceId
+			data.Amount = bridgeTransfers[i].FungibleTransfer.Amount
+			data.Recipient = bridgeTransfers[i].FungibleTransfer.Recipient
+
+			e.ChainBridge_FungibleTransfer = append(e.ChainBridge_FungibleTransfer, data)
+		} else if bridgeTransfers[i].IsNonFungible {
+			data := events.EventNonFungibleTransfer{}
+			data.Destination = bridgeTransfers[i].NonFungibleTransfer.Destination
+			data.DepositNonce = bridgeTransfers[i].NonFungibleTransfer.DepositNonce
+			data.ResourceId = bridgeTransfers[i].NonFungibleTransfer.ResourceId
+			data.TokenId = bridgeTransfers[i].NonFungibleTransfer.TokenId
+			data.Recipient = bridgeTransfers[i].NonFungibleTransfer.Recipient
+			data.Metadata = bridgeTransfers[i].NonFungibleTransfer.Metadata
+
+			e.ChainBridge_NonFungibleTransfer = append(e.ChainBridge_NonFungibleTransfer, data)
+		} else if bridgeTransfers[i].IsGeneric {
+			data := events.EventGenericTransfer{}
+			data.Destination = bridgeTransfers[i].NonFungibleTransfer.Destination
+			data.DepositNonce = bridgeTransfers[i].NonFungibleTransfer.DepositNonce
+			data.ResourceId = bridgeTransfers[i].NonFungibleTransfer.ResourceId
+			data.Metadata = bridgeTransfers[i].NonFungibleTransfer.Metadata
+
+			e.ChainBridge_GenericTransfer = append(e.ChainBridge_GenericTransfer, data)
+		} else {
+			return fmt.Errorf("unknow bridge transfer type: %v", bridgeTransfers[i])
+		}
+	}
+
+	l.handleEvents(e)
+	l.log.Trace("Finished processing events", "block", hash.Hex())
+
+	return nil
 }
 
 // processEvents fetches a block and parses out the events, calling Listener.handleEvents()
