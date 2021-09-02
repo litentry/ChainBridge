@@ -190,44 +190,44 @@ func (l *listener) processBridgeTransfer(hash types.Hash) error {
 		return err
 	}
 
-	var bridgeTransfers BridgeTransfers
-	_, err = l.conn.api.RPC.State.GetStorage(key, &bridgeTransfers, hash)
+	var bridgeEvents BridgeEvents
+	_, err = l.conn.api.RPC.State.GetStorage(key, &bridgeEvents, hash)
 	if err != nil {
 		return err
 	}
 
 	e := utils.Events{}
-	transferNum := len(bridgeTransfers)
+	transferNum := len(bridgeEvents)
 	for i := 0; i < transferNum; i++ {
-		if bridgeTransfers[i].IsFungible {
+		if bridgeEvents[i].IsFungible {
 			data := events.EventFungibleTransfer{}
-			data.Destination = bridgeTransfers[i].FungibleTransfer.Destination
-			data.DepositNonce = bridgeTransfers[i].FungibleTransfer.DepositNonce
-			data.ResourceId = bridgeTransfers[i].FungibleTransfer.ResourceId
-			data.Amount = bridgeTransfers[i].FungibleTransfer.Amount
-			data.Recipient = bridgeTransfers[i].FungibleTransfer.Recipient
+			data.Destination = bridgeEvents[i].FungibleTransfer.Destination
+			data.DepositNonce = bridgeEvents[i].FungibleTransfer.DepositNonce
+			data.ResourceId = bridgeEvents[i].FungibleTransfer.ResourceId
+			data.Amount = bridgeEvents[i].FungibleTransfer.Amount
+			data.Recipient = bridgeEvents[i].FungibleTransfer.Recipient
 
 			e.ChainBridge_FungibleTransfer = append(e.ChainBridge_FungibleTransfer, data)
-		} else if bridgeTransfers[i].IsNonFungible {
+		} else if bridgeEvents[i].IsNonFungible {
 			data := events.EventNonFungibleTransfer{}
-			data.Destination = bridgeTransfers[i].NonFungibleTransfer.Destination
-			data.DepositNonce = bridgeTransfers[i].NonFungibleTransfer.DepositNonce
-			data.ResourceId = bridgeTransfers[i].NonFungibleTransfer.ResourceId
-			data.TokenId = bridgeTransfers[i].NonFungibleTransfer.TokenId
-			data.Recipient = bridgeTransfers[i].NonFungibleTransfer.Recipient
-			data.Metadata = bridgeTransfers[i].NonFungibleTransfer.Metadata
+			data.Destination = bridgeEvents[i].NonFungibleTransfer.Destination
+			data.DepositNonce = bridgeEvents[i].NonFungibleTransfer.DepositNonce
+			data.ResourceId = bridgeEvents[i].NonFungibleTransfer.ResourceId
+			data.TokenId = bridgeEvents[i].NonFungibleTransfer.TokenId
+			data.Recipient = bridgeEvents[i].NonFungibleTransfer.Recipient
+			data.Metadata = bridgeEvents[i].NonFungibleTransfer.Metadata
 
 			e.ChainBridge_NonFungibleTransfer = append(e.ChainBridge_NonFungibleTransfer, data)
-		} else if bridgeTransfers[i].IsGeneric {
+		} else if bridgeEvents[i].IsGeneric {
 			data := events.EventGenericTransfer{}
-			data.Destination = bridgeTransfers[i].NonFungibleTransfer.Destination
-			data.DepositNonce = bridgeTransfers[i].NonFungibleTransfer.DepositNonce
-			data.ResourceId = bridgeTransfers[i].NonFungibleTransfer.ResourceId
-			data.Metadata = bridgeTransfers[i].NonFungibleTransfer.Metadata
+			data.Destination = bridgeEvents[i].NonFungibleTransfer.Destination
+			data.DepositNonce = bridgeEvents[i].NonFungibleTransfer.DepositNonce
+			data.ResourceId = bridgeEvents[i].NonFungibleTransfer.ResourceId
+			data.Metadata = bridgeEvents[i].NonFungibleTransfer.Metadata
 
 			e.ChainBridge_GenericTransfer = append(e.ChainBridge_GenericTransfer, data)
 		} else {
-			return fmt.Errorf("unknow bridge transfer type: %v", bridgeTransfers[i])
+			return fmt.Errorf("unknow bridge transfer type: %v", bridgeEvents[i])
 		}
 	}
 
