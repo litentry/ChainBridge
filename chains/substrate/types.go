@@ -65,9 +65,9 @@ type GenericTransferItem struct {
 	Metadata     types.Bytes
 }
 
-type BridgeTransfers []TransferType
+type BridgeEvents []BridgeEvent
 
-type TransferType struct {
+type BridgeEvent struct {
 	IsFungible          bool
 	FungibleTransfer    FungibleTransferItem
 	IsNonFungible       bool
@@ -76,7 +76,7 @@ type TransferType struct {
 	GenericTransfer     GenericTransferItem
 }
 
-func (m *TransferType) Decode(decoder scale.Decoder) error {
+func (m *BridgeEvent) Decode(decoder scale.Decoder) error {
 	b, err := decoder.ReadOneByte()
 
 	if err != nil {
