@@ -169,6 +169,51 @@ type EventRegistryTmp struct {
 	Topics []types.Hash
 }
 
+type EventPhragmenElectionNewTerm struct {
+	Phase types.Phase
+	Term  []struct {
+		Account types.AccountID
+		Balance types.U128
+	}
+	Topics []types.Hash
+}
+
+type EventPhragmenElectionEmptyTerm struct {
+	Phase  types.Phase
+	Topics []types.Hash
+}
+
+type EventPhragmenElectionElectionError struct {
+	Phase  types.Phase
+	Topics []types.Hash
+}
+
+type EventPhragmenElectionMemberKicked struct {
+	Phase  types.Phase
+	Member types.AccountID
+	Topics []types.Hash
+}
+
+type EventPhragmenElectionRenounced struct {
+	Phase  types.Phase
+	Member types.AccountID
+	Topics []types.Hash
+}
+
+type EventPhragmenElectionCandidateSlashed struct {
+	Phase  types.Phase
+	Member types.AccountID
+	Amount types.U128
+	Topics []types.Hash
+}
+
+type EventPhragmenElectionSeatHolderSlashed struct {
+	Phase  types.Phase
+	Member types.AccountID
+	Amount types.U128
+	Topics []types.Hash
+}
+
 type Events struct {
 	types.EventRecords
 	events.ChainBridgeEvents
@@ -177,4 +222,11 @@ type Events struct {
 	events.PhalaMiningEvents
 	events.PhalaStakepoolEvents
 	events.KittiesEvents
+	PhragmenElection_NewTerm           []EventPhragmenElectionNewTerm           //nolint:stylecheck,golint
+	PhragmenElection_EmptyTerm         []EventPhragmenElectionEmptyTerm         //nolint:stylecheck,golint
+	PhragmenElection_ElectionError     []EventPhragmenElectionElectionError     //nolint:stylecheck,golint
+	PhragmenElection_MemberKicked      []EventPhragmenElectionMemberKicked      //nolint:stylecheck,golint
+	PhragmenElection_Renounced         []EventPhragmenElectionRenounced         //nolint:stylecheck,golint
+	PhragmenElection_CandidateSlashed  []EventPhragmenElectionCandidateSlashed  //nolint:stylecheck,golint
+	PhragmenElection_SeatHolderSlashed []EventPhragmenElectionSeatHolderSlashed //nolint:stylecheck,golint
 }

@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"
+	"github.com/Phala-Network/chainbridge-utils/msg"
 	gsrpc "github.com/Phala-Network/go-substrate-rpc-client/v3"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/signature"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
