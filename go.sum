@@ -134,6 +134,8 @@ github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210818082942-6fc1
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210818082942-6fc10a0154c5/go.mod h1:44qegf4B2smsosBq5saGCmmZSkzWAy99FWnxugaSnmA=
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210822132012-ca6e14919ad9 h1:sfgqIqMZvBjkAWQU1RSbgcmWstn472Q7s4Kve374LU8=
 github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210822132012-ca6e14919ad9/go.mod h1:44qegf4B2smsosBq5saGCmmZSkzWAy99FWnxugaSnmA=
+github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210908102912-5c3572ab1978 h1:LGnPWuE2fPFiXOPVQordjCA+KytEZosZLxxKjkfJhuo=
+github.com/Phala-Network/chainbridge-substrate-events v0.0.0-20210908102912-5c3572ab1978/go.mod h1:/2H4k77gFZ01bhlP12kpfR9suIBOa9qs71O420lfFmk=
 github.com/Phala-Network/chainbridge-utils v1.0.6 h1:DV9dNnrsU7fRG49biyRlHsPLd9Augv9lepxnP581ixM=
 github.com/Phala-Network/chainbridge-utils v1.0.6/go.mod h1:T5cOZhxdY4x0DrE0EqOnMwAPE8d4bNGqiPfN16o1rzc=
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210422070737-f337bbbd67e9 h1:c4Hu++qvrCJNXxvJszfJXGTKrXzoaD88hYhVVkxoLhk=
@@ -182,6 +184,8 @@ github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210817065819-0154b8d7a3e9 
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210817065819-0154b8d7a3e9/go.mod h1:NG2NyiY0GDkXNEkhtt+pFkqdfR1l31lBd6ohTT7ciR4=
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210818083108-f2b3dcf9fcd6 h1:aRDhKV9rCkly9qbvUI6k9kHqmKOxpw5erfwYlSf9Sik=
 github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210818083108-f2b3dcf9fcd6/go.mod h1:QOtHO4R4EXLIXi7SDlSN2q4sxA+XEqddoAFPXPDS4ig=
+github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210908102735-35b07589fb00 h1:q0DsLTMFWvo73YShXC4EwGFDA0H07AI7BzQlKkEqgoQ=
+github.com/Phala-Network/chainbridge-utils v1.0.7-0.20210908102735-35b07589fb00/go.mod h1:qYoqnE4vZnKm7uDByXDzilWgW/E0qk/bAIqEBzbkomQ=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210518030814-ec37d8ed480e h1:/sKQkEFNt0+T9uZ0z6fBv36Rlb8RQjThb0V9Cqe82gg=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210518030814-ec37d8ed480e/go.mod h1:4+N2ToJXAhbOfLhZfjH1+NuH+DQRYGBvu8wC5Z9x9zk=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210518033235-932bec39fd0a h1:fhkqZTXm7snBIOWUP5sXYW37Ke3luqt8jPzEJLWFAuk=
@@ -228,6 +232,8 @@ github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210817034252-70f0
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210817034252-70f079ec8e1c/go.mod h1:anL64VSLRELLIJNuZfrR0mnvjhcW9VXhQPLBkz0Yz64=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210818082507-cd5818d01bfd h1:GO1UBF/bBX55LgZXXV4bI1ijLwWmRkmKPZTPmmjkE1o=
 github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210818082507-cd5818d01bfd/go.mod h1:anL64VSLRELLIJNuZfrR0mnvjhcW9VXhQPLBkz0Yz64=
+github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210908102241-c17ec2e5cfeb h1:heWfK4pijr+2nlm9p1oGZnrp4QOqFd16QMsLqSHhZgc=
+github.com/Phala-Network/go-substrate-rpc-client/v3 v3.0.1-0.20210908102241-c17ec2e5cfeb/go.mod h1:anL64VSLRELLIJNuZfrR0mnvjhcW9VXhQPLBkz0Yz64=
 github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6 h1:fLjPD/aNc3UIOA6tDi6QXUemppXK3P9BI7mr2hd6gx8=
 github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6/go.mod h1:3eOhrUMpNV+6aFIbp5/iudMxNCF27Vw2OZgy4xEx0Fg=
 github.com/VictoriaMetrics/fastcache v1.5.3/go.mod h1:+jv9Ckb+za/P1ZRg/sulP5Ni1v49daAVERr0H3CuscE=
