@@ -97,15 +97,7 @@ func (w *writer) ResolveMessage(m msg.Message) bool {
 }
 
 func (w *writer) resolveResourceId(id [32]byte) (string, error) {
-	var res []byte
-	exists, err := w.conn.queryStorage(utils.BridgeStoragePrefix, "Resources", id[:], nil, &res)
-	if err != nil {
-		return "", err
-	}
-	if !exists {
-		return "", fmt.Errorf("resource %x not found on chain", id)
-	}
-	return string(res), nil
+	return "BridgeTransfer.transfer", nil
 }
 
 // proposalValid asserts the state of a proposal. If the proposal is active and this relayer
