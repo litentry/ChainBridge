@@ -96,10 +96,6 @@ func (w *writer) ResolveMessage(m msg.Message) bool {
 	return true
 }
 
-func (w *writer) resolveResourceId(id [32]byte) (string, error) {
-	return "BridgeTransfer.transfer", nil
-}
-
 // proposalValid asserts the state of a proposal. If the proposal is active and this relayer
 // has not voted, it will return true. Otherwise, it will return false with a reason string.
 func (w *writer) proposalValid(prop *proposal) (bool, string, error) {

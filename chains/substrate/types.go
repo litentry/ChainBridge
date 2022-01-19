@@ -23,6 +23,8 @@ type voteStatus struct {
 	IsRejected bool
 }
 
+var BridgeTransfer string = "BridgeTransfer.transfer"
+
 func (m *voteStatus) Decode(decoder scale.Decoder) error {
 	b, err := decoder.ReadOneByte()
 
@@ -136,13 +138,9 @@ func (w *writer) createFungibleProposal(m msg.Message) (*proposal, error) {
 	depositNonce := types.U64(m.DepositNonce)
 
 	meta := w.conn.getMetadata()
-	method, err := w.resolveResourceId(m.ResourceId)
-	if err != nil {
-		return nil, err
-	}
 	call, err := types.NewCall(
 		&meta,
-		method,
+		BridgeTransfer,
 		recipient,
 		amount,
 	)
@@ -162,7 +160,7 @@ func (w *writer) createFungibleProposal(m msg.Message) (*proposal, error) {
 		call:         call,
 		sourceId:     types.U8(m.Source),
 		resourceId:   types.NewBytes32(m.ResourceId),
-		method:       method,
+		method:       BridgeTransfer,
 	}, nil
 }
 
@@ -173,14 +171,9 @@ func (w *writer) createNonFungibleProposal(m msg.Message) (*proposal, error) {
 	depositNonce := types.U64(m.DepositNonce)
 
 	meta := w.conn.getMetadata()
-	method, err := w.resolveResourceId(m.ResourceId)
-	if err != nil {
-		return nil, err
-	}
-
 	call, err := types.NewCall(
 		&meta,
-		method,
+		BridgeTransfer,
 		recipient,
 		tokenId,
 		metadata,
@@ -201,7 +194,7 @@ func (w *writer) createNonFungibleProposal(m msg.Message) (*proposal, error) {
 		call:         call,
 		sourceId:     types.U8(m.Source),
 		resourceId:   types.NewBytes32(m.ResourceId),
-		method:       method,
+		method:       BridgeTransfer,
 	}, nil
 }
 
@@ -209,14 +202,9 @@ func (w *writer) createGenericProposal(m msg.Message) (*proposal, error) {
 	metadata := types.Bytes(m.Payload[0].([]byte))
 
 	meta := w.conn.getMetadata()
-	method, err := w.resolveResourceId(m.ResourceId)
-	if err != nil {
-		return nil, err
-	}
-
 	call, err := types.NewCall(
 		&meta,
-		method,
+		BridgeTransfer,
 		metadata,
 	)
 	if err != nil {
@@ -235,6 +223,6 @@ func (w *writer) createGenericProposal(m msg.Message) (*proposal, error) {
 		call:         call,
 		sourceId:     types.U8(m.Source),
 		resourceId:   types.NewBytes32(m.ResourceId),
-		method:       method,
+		method:       BridgeTransfer,
 	}, nil
 }
