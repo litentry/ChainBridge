@@ -157,18 +157,7 @@ func FundErc20Handler(client *Client, handlerAddress, erc20Address common.Addres
 		return err
 	}
 
-	instance, err := ERC20Handler.NewERC20Handler(handlerAddress, client.Client)
-	if err != nil {
-		return err
-	}
-
-	client.Opts.Nonce = client.Opts.Nonce.Add(client.Opts.Nonce, big.NewInt(1))
-	tx, err := instance.FundERC20(client.Opts, erc20Address, client.Opts.From, amount)
-	if err != nil {
-		return err
-	}
-
-	err = WaitForTx(client, tx)
+	_, err = ERC20Handler.NewERC20Handler(handlerAddress, client.Client)
 	if err != nil {
 		return err
 	}
