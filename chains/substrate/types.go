@@ -23,7 +23,7 @@ type voteStatus struct {
 	IsRejected bool
 }
 
-var BridgeTransfer string = "BridgeTransfer.transfer"
+var BridgeTransfer string = "ChainBridge.handle_fungible_transfer"
 
 func (m *voteStatus) Decode(decoder scale.Decoder) error {
 	b, err := decoder.ReadOneByte()
