@@ -4,6 +4,7 @@
 package HandlerHelpers
 
 import (
+	"errors"
 	"math/big"
 	"strings"
 
@@ -17,6 +18,7 @@ import (
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
+	_ = errors.New
 	_ = big.NewInt
 	_ = strings.NewReader
 	_ = ethereum.NotFound
@@ -26,20 +28,31 @@ var (
 	_ = event.NewSubscription
 )
 
+// HandlerHelpersMetaData contains all meta data concerning the HandlerHelpers contract.
+var HandlerHelpersMetaData = &bind.MetaData{
+	ABI: "[{\"inputs\":[],\"name\":\"_bridgeAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\",\"constant\":true},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_burnList\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\",\"constant\":true},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_contractWhitelist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\",\"constant\":true},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"srcDecimals\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"destDecimals\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\",\"constant\":true},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToTokenContractAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\",\"constant\":true},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_tokenContractAddressToResourceID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\",\"constant\":true},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"}],\"name\":\"setResource\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"}],\"name\":\"setBurnable\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"srcDecimals\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"destDecimals\",\"type\":\"uint8\"}],\"name\":\"setDecimals\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amountOrTokenID\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	Bin: "0x608060405234801561001057600080fd5b50610984806100206000396000f3fe608060405234801561001057600080fd5b506004361061009e5760003560e01c8063b8fa373611610066578063b8fa373614610227578063c8ba6c8714610275578063d51f0f47146102cd578063d9caed1214610332578063f4712744146103a05761009e565b806307b7ed99146100a35780630a6d55d8146100e7578063318c136e1461013f5780636a70d081146101735780637f79bea8146101cd575b600080fd5b6100e5600480360360208110156100b957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506103fe565b005b610113600480360360208110156100fd57600080fd5b8101908080359060200190929190505050610412565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b610147610445565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6101b56004803603602081101561018957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610469565b60405180821515815260200191505060405180910390f35b61020f600480360360208110156101e357600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610489565b60405180821515815260200191505060405180910390f35b6102736004803603604081101561023d57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506104a9565b005b6102b76004803603602081101561028b57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506104bf565b6040518082815260200191505060405180910390f35b61030f600480360360208110156102e357600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506104d7565b604051808360ff1681526020018260ff1681526020019250505060405180910390f35b61039e6004803603606081101561034857600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610515565b005b6103fc600480360360608110156103b657600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803560ff169060200190929190803560ff16906020019092919050505061051a565b005b610406610532565b61040f816105f5565b50565b60016020528060005260406000206000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60046020528060005260406000206000915054906101000a900460ff1681565b60036020528060005260406000206000915054906101000a900460ff1681565b6104b1610532565b6104bb82826106f2565b5050565b60026020528060005260406000206000915090505481565b60056020528060005260406000206000915090508060000160009054906101000a900460ff16908060000160019054906101000a900460ff16905082565b505050565b610522610532565b61052d8383836107e4565b505050565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146105f3576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601e8152602001807f73656e646572206d7573742062652062726964676520636f6e7472616374000081525060200191505060405180910390fd5b565b600360008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff16610697576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252602481526020018061092b6024913960400191505060405180910390fd5b6001600460008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050565b806001600084815260200190815260200160002060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555081600260008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055506001600360008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055505050565b600360008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff16610886576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252602481526020018061092b6024913960400191505060405180910390fd5b60405180604001604052808360ff1681526020018260ff16815250600560008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000160006101000a81548160ff021916908360ff16021790555060208201518160000160016101000a81548160ff021916908360ff16021790555090505050505056fe70726f766964656420636f6e7472616374206973206e6f742077686974656c6973746564a264697066735822122000db83ffdd375958fc73d78a7e781924b12f1989bef243062a08d0603803fcf964736f6c63430007000033",
+}
+
 // HandlerHelpersABI is the input ABI used to generate the binding from.
-const HandlerHelpersABI = "[{\"inputs\":[],\"name\":\"_bridgeAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_burnList\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_contractWhitelist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToTokenContractAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_tokenContractAddressToResourceID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"}],\"name\":\"setResource\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"}],\"name\":\"setBurnable\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amountOrTokenID\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+// Deprecated: Use HandlerHelpersMetaData.ABI instead.
+var HandlerHelpersABI = HandlerHelpersMetaData.ABI
 
 // HandlerHelpersBin is the compiled bytecode used for deploying new contracts.
-var HandlerHelpersBin = "0x608060405234801561001057600080fd5b5061070f806100206000396000f3fe608060405234801561001057600080fd5b50600436106100885760003560e01c80637f79bea81161005b5780637f79bea8146101b7578063b8fa373614610211578063c8ba6c871461025f578063d9caed12146102b757610088565b806307b7ed991461008d5780630a6d55d8146100d1578063318c136e146101295780636a70d0811461015d575b600080fd5b6100cf600480360360208110156100a357600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610325565b005b6100fd600480360360208110156100e757600080fd5b8101908080359060200190929190505050610339565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b61013161036c565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b61019f6004803603602081101561017357600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610390565b60405180821515815260200191505060405180910390f35b6101f9600480360360208110156101cd57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506103b0565b60405180821515815260200191505060405180910390f35b61025d6004803603604081101561022757600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506103d0565b005b6102a16004803603602081101561027557600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506103e6565b6040518082815260200191505060405180910390f35b610323600480360360608110156102cd57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506103fe565b005b61032d610403565b610336816104c6565b50565b60016020528060005260406000206000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60046020528060005260406000206000915054906101000a900460ff1681565b60036020528060005260406000206000915054906101000a900460ff1681565b6103d8610403565b6103e282826105c3565b5050565b60026020528060005260406000206000915090505481565b505050565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146104c4576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601e8152602001807f73656e646572206d7573742062652062726964676520636f6e7472616374000081525060200191505060405180910390fd5b565b600360008273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff16610568576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260248152602001806106b66024913960400191505060405180910390fd5b6001600460008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050565b806001600084815260200190815260200160002060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555081600260008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055506001600360008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff021916908315150217905550505056fe70726f766964656420636f6e7472616374206973206e6f742077686974656c6973746564a26469706673582212209ef08fb7b3d86ce18b14bd8105687b635570c2f24af11d145e7889ec2ea58d9064736f6c63430007000033"
+// Deprecated: Use HandlerHelpersMetaData.Bin instead.
+var HandlerHelpersBin = HandlerHelpersMetaData.Bin
 
 // DeployHandlerHelpers deploys a new Ethereum contract, binding an instance of HandlerHelpers to it.
 func DeployHandlerHelpers(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *HandlerHelpers, error) {
-	parsed, err := abi.JSON(strings.NewReader(HandlerHelpersABI))
+	parsed, err := HandlerHelpersMetaData.GetAbi()
 	if err != nil {
 		return common.Address{}, nil, nil, err
 	}
+	if parsed == nil {
+		return common.Address{}, nil, nil, errors.New("GetABI returned nil")
+	}
 
-	address, tx, contract, err := bind.DeployContract(auth, parsed, common.FromHex(HandlerHelpersBin), backend)
+	address, tx, contract, err := bind.DeployContract(auth, *parsed, common.FromHex(HandlerHelpersBin), backend)
 	if err != nil {
 		return common.Address{}, nil, nil, err
 	}
@@ -281,6 +294,51 @@ func (_HandlerHelpers *HandlerHelpersCallerSession) ContractWhitelist(arg0 commo
 	return _HandlerHelpers.Contract.ContractWhitelist(&_HandlerHelpers.CallOpts, arg0)
 }
 
+// Decimals is a free data retrieval call binding the contract method 0xd51f0f47.
+//
+// Solidity: function _decimals(address ) view returns(uint8 srcDecimals, uint8 destDecimals)
+func (_HandlerHelpers *HandlerHelpersCaller) Decimals(opts *bind.CallOpts, arg0 common.Address) (struct {
+	SrcDecimals  uint8
+	DestDecimals uint8
+}, error) {
+	var out []interface{}
+	err := _HandlerHelpers.contract.Call(opts, &out, "_decimals", arg0)
+
+	outstruct := new(struct {
+		SrcDecimals  uint8
+		DestDecimals uint8
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.SrcDecimals = *abi.ConvertType(out[0], new(uint8)).(*uint8)
+	outstruct.DestDecimals = *abi.ConvertType(out[1], new(uint8)).(*uint8)
+
+	return *outstruct, err
+
+}
+
+// Decimals is a free data retrieval call binding the contract method 0xd51f0f47.
+//
+// Solidity: function _decimals(address ) view returns(uint8 srcDecimals, uint8 destDecimals)
+func (_HandlerHelpers *HandlerHelpersSession) Decimals(arg0 common.Address) (struct {
+	SrcDecimals  uint8
+	DestDecimals uint8
+}, error) {
+	return _HandlerHelpers.Contract.Decimals(&_HandlerHelpers.CallOpts, arg0)
+}
+
+// Decimals is a free data retrieval call binding the contract method 0xd51f0f47.
+//
+// Solidity: function _decimals(address ) view returns(uint8 srcDecimals, uint8 destDecimals)
+func (_HandlerHelpers *HandlerHelpersCallerSession) Decimals(arg0 common.Address) (struct {
+	SrcDecimals  uint8
+	DestDecimals uint8
+}, error) {
+	return _HandlerHelpers.Contract.Decimals(&_HandlerHelpers.CallOpts, arg0)
+}
+
 // ResourceIDToTokenContractAddress is a free data retrieval call binding the contract method 0x0a6d55d8.
 //
 // Solidity: function _resourceIDToTokenContractAddress(bytes32 ) view returns(address)
@@ -362,6 +420,27 @@ func (_HandlerHelpers *HandlerHelpersSession) SetBurnable(contractAddress common
 // Solidity: function setBurnable(address contractAddress) returns()
 func (_HandlerHelpers *HandlerHelpersTransactorSession) SetBurnable(contractAddress common.Address) (*types.Transaction, error) {
 	return _HandlerHelpers.Contract.SetBurnable(&_HandlerHelpers.TransactOpts, contractAddress)
+}
+
+// SetDecimals is a paid mutator transaction binding the contract method 0xf4712744.
+//
+// Solidity: function setDecimals(address contractAddress, uint8 srcDecimals, uint8 destDecimals) returns()
+func (_HandlerHelpers *HandlerHelpersTransactor) SetDecimals(opts *bind.TransactOpts, contractAddress common.Address, srcDecimals uint8, destDecimals uint8) (*types.Transaction, error) {
+	return _HandlerHelpers.contract.Transact(opts, "setDecimals", contractAddress, srcDecimals, destDecimals)
+}
+
+// SetDecimals is a paid mutator transaction binding the contract method 0xf4712744.
+//
+// Solidity: function setDecimals(address contractAddress, uint8 srcDecimals, uint8 destDecimals) returns()
+func (_HandlerHelpers *HandlerHelpersSession) SetDecimals(contractAddress common.Address, srcDecimals uint8, destDecimals uint8) (*types.Transaction, error) {
+	return _HandlerHelpers.Contract.SetDecimals(&_HandlerHelpers.TransactOpts, contractAddress, srcDecimals, destDecimals)
+}
+
+// SetDecimals is a paid mutator transaction binding the contract method 0xf4712744.
+//
+// Solidity: function setDecimals(address contractAddress, uint8 srcDecimals, uint8 destDecimals) returns()
+func (_HandlerHelpers *HandlerHelpersTransactorSession) SetDecimals(contractAddress common.Address, srcDecimals uint8, destDecimals uint8) (*types.Transaction, error) {
+	return _HandlerHelpers.Contract.SetDecimals(&_HandlerHelpers.TransactOpts, contractAddress, srcDecimals, destDecimals)
 }
 
 // SetResource is a paid mutator transaction binding the contract method 0xb8fa3736.
