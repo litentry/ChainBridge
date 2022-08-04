@@ -12,7 +12,7 @@ import (
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 )
 
-// WARNING: THIS METHOD IS UNSAFE AND MAY PANIC
+// EnsureInitializedChain WARNING: THIS METHOD IS UNSAFE AND MAY PANIC
 func EnsureInitializedChain(t *testing.T, client *utils.Client, relayers []types.AccountID, chains []msg.ChainId, resources map[msg.ResourceId]utils.Method, threshold uint32) {
 	var count types.U32
 	_, err := utils.QueryStorage(client, utils.BridgeStoragePrefix, "RelayerCount", nil, nil, &count)

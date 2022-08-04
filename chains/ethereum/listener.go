@@ -10,6 +10,7 @@ import (
 	"math/big"
 	"time"
 
+	"github.com/ChainSafe/log15"
 	"github.com/Phala-Network/ChainBridge/bindings/Bridge"
 	"github.com/Phala-Network/ChainBridge/bindings/ERC20Handler"
 	"github.com/Phala-Network/ChainBridge/bindings/ERC721Handler"
@@ -19,7 +20,6 @@ import (
 	"github.com/Phala-Network/chainbridge-utils/blockstore"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/ChainSafe/log15"
 	eth "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	ethcommon "github.com/ethereum/go-ethereum/common"

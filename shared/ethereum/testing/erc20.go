@@ -7,9 +7,9 @@ import (
 	"math/big"
 	"testing"
 
+	"github.com/ChainSafe/log15"
 	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/ChainSafe/log15"
 	"github.com/ethereum/go-ethereum/common"
 )
 

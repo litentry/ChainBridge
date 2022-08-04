@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/ChainSafe/log15"
+	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 )
 

@@ -6,8 +6,8 @@ package ethtest
 import (
 	"testing"
 
-	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
 	"github.com/ChainSafe/log15"
+	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
 	"github.com/ethereum/go-ethereum/common"
 )
 
