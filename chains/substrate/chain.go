@@ -24,13 +24,16 @@ As the writer receives messages from the router, it constructs proposals. If a p
 package substrate
 
 import (
+	"fmt"
+	"github.com/ChainSafe/log15"
 	"github.com/Phala-Network/chainbridge-utils/blockstore"
 	"github.com/Phala-Network/chainbridge-utils/core"
+	"github.com/Phala-Network/chainbridge-utils/crypto"
 	"github.com/Phala-Network/chainbridge-utils/crypto/sr25519"
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/ChainSafe/log15"
+	"os"
 )
 
 var _ core.Chain = &Chain{}
@@ -59,7 +62,15 @@ func checkBlockstore(bs *blockstore.Blockstore, startBlock uint64) (uint64, erro
 }
 
 func InitializeChain(cfg *core.ChainConfig, logger log15.Logger, sysErr chan<- error, m *metrics.ChainMetrics) (*Chain, error) {
-	kp, err := keystore.KeypairFromAddress(cfg.From, keystore.SubChain, cfg.KeystorePath, cfg.Insecure)
+	var kp crypto.Keypair
+	var err error
+	if stage := os.Getenv("STAGE"); stage == "dev" {
+		path := fmt.Sprintf("%s/%s.key", cfg.KeystorePath, cfg.From)
+		kp, err = keystore.ReadFromFileAndDecrypt(path, []byte(""), "sr25519")
+	} else {
+		kp, err = keystore.KeypairFromAddress(cfg.From, keystore.SubChain, cfg.KeystorePath, cfg.Insecure)
+	}
+
 	if err != nil {
 		return nil, err
 	}

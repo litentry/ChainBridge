@@ -22,8 +22,11 @@ package ethereum
 
 import (
 	"fmt"
+	"github.com/Phala-Network/chainbridge-utils/crypto"
 	"math/big"
+	"os"
 
+	"github.com/ChainSafe/log15"
 	bridge "github.com/Phala-Network/ChainBridge/bindings/Bridge"
 	erc20Handler "github.com/Phala-Network/ChainBridge/bindings/ERC20Handler"
 	erc721Handler "github.com/Phala-Network/ChainBridge/bindings/ERC721Handler"
@@ -35,7 +38,6 @@ import (
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/ChainSafe/log15"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -94,8 +96,13 @@ func InitializeChain(chainCfg *core.ChainConfig, logger log15.Logger, sysErr cha
 	if err != nil {
 		return nil, err
 	}
-
-	kpI, err := keystore.KeypairFromAddress(cfg.from, keystore.EthChain, cfg.keystorePath, chainCfg.Insecure)
+	var kpI crypto.Keypair
+	if stage := os.Getenv("stage"); stage == "dev" {
+		path := fmt.Sprintf("%s/%s.key", cfg.keystorePath, cfg.from)
+		kpI, err = keystore.ReadFromFileAndDecrypt(path, []byte(""), "secp256k1")
+	} else {
+		kpI, err = keystore.KeypairFromAddress(cfg.from, keystore.EthChain, cfg.keystorePath, chainCfg.Insecure)
+	}
 	if err != nil {
 		return nil, err
 	}
