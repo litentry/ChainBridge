@@ -97,7 +97,7 @@ func InitializeChain(chainCfg *core.ChainConfig, logger log15.Logger, sysErr cha
 		return nil, err
 	}
 	var kpI crypto.Keypair
-	if stage := os.Getenv("stage"); stage == "dev" {
+	if stage := os.Getenv("STAGE"); stage == "dev" {
 		path := fmt.Sprintf("%s/%s.key", cfg.keystorePath, cfg.from)
 		kpI, err = keystore.ReadFromFileAndDecrypt(path, []byte(""), "secp256k1")
 	} else {
