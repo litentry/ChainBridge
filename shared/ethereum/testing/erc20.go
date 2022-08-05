@@ -8,9 +8,9 @@ import (
 	"testing"
 
 	"github.com/ChainSafe/log15"
-	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ethereum/go-ethereum/common"
+	utils "github.com/litentry/ChainBridge/shared/ethereum"
 )
 
 func DeployMintApproveErc20(t *testing.T, client *utils.Client, erc20Handler common.Address, amount *big.Int) common.Address {

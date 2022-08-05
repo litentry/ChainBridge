@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/ChainSafe/log15"
-	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
+	utils "github.com/litentry/ChainBridge/shared/substrate"
 )
 
 var TestTimeout = time.Second * 15

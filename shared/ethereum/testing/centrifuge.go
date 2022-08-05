@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/ChainSafe/log15"
-	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
 	"github.com/ethereum/go-ethereum/common"
+	utils "github.com/litentry/ChainBridge/shared/ethereum"
 )
 
 func DeployAssetStore(t *testing.T, client *utils.Client) common.Address {

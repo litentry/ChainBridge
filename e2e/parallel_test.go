@@ -9,16 +9,16 @@ import (
 	"testing"
 	"time"
 
-	eth "github.com/Phala-Network/ChainBridge/e2e/ethereum"
-	ethutils "github.com/Phala-Network/ChainBridge/shared/ethereum"
-	ethtest "github.com/Phala-Network/ChainBridge/shared/ethereum/testing"
-	subutils "github.com/Phala-Network/ChainBridge/shared/substrate"
-	subtest "github.com/Phala-Network/ChainBridge/shared/substrate/testing"
-	"github.com/Phala-Network/chainbridge-utils/msg"
 	log "github.com/ChainSafe/log15"
+	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/signature"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 	"github.com/ethereum/go-ethereum/common"
+	eth "github.com/litentry/ChainBridge/e2e/ethereum"
+	ethutils "github.com/litentry/ChainBridge/shared/ethereum"
+	ethtest "github.com/litentry/ChainBridge/shared/ethereum/testing"
+	subutils "github.com/litentry/ChainBridge/shared/substrate"
+	subtest "github.com/litentry/ChainBridge/shared/substrate/testing"
 )
 
 // Random recipient

@@ -9,10 +9,10 @@ import (
 	"math/big"
 
 	"github.com/ChainSafe/log15"
-	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
 	eth "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
+	utils "github.com/litentry/ChainBridge/shared/ethereum"
 )
 
 func WatchEvent(client *utils.Client, bridge common.Address, subStr utils.EventSig) {

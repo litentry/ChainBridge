@@ -27,11 +27,6 @@ import (
 	"os"
 
 	"github.com/ChainSafe/log15"
-	bridge "github.com/Phala-Network/ChainBridge/bindings/Bridge"
-	erc20Handler "github.com/Phala-Network/ChainBridge/bindings/ERC20Handler"
-	erc721Handler "github.com/Phala-Network/ChainBridge/bindings/ERC721Handler"
-	"github.com/Phala-Network/ChainBridge/bindings/GenericHandler"
-	connection "github.com/Phala-Network/ChainBridge/connections/ethereum"
 	"github.com/Phala-Network/chainbridge-utils/blockstore"
 	"github.com/Phala-Network/chainbridge-utils/core"
 	"github.com/Phala-Network/chainbridge-utils/crypto/secp256k1"
@@ -41,6 +36,11 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+	bridge "github.com/litentry/ChainBridge/bindings/Bridge"
+	erc20Handler "github.com/litentry/ChainBridge/bindings/ERC20Handler"
+	erc721Handler "github.com/litentry/ChainBridge/bindings/ERC721Handler"
+	"github.com/litentry/ChainBridge/bindings/GenericHandler"
+	connection "github.com/litentry/ChainBridge/connections/ethereum"
 )
 
 var _ core.Chain = &Chain{}

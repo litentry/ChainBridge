@@ -9,10 +9,10 @@ import (
 	"testing"
 
 	"github.com/ChainSafe/log15"
-	ethutils "github.com/Phala-Network/ChainBridge/shared/ethereum"
-	ethtest "github.com/Phala-Network/ChainBridge/shared/ethereum/testing"
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	ethcmn "github.com/ethereum/go-ethereum/common"
+	ethutils "github.com/litentry/ChainBridge/shared/ethereum"
+	ethtest "github.com/litentry/ChainBridge/shared/ethereum/testing"
 )
 
 var TestEndpoint = "ws://localhost:8545"

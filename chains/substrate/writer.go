@@ -12,10 +12,10 @@ import (
 	"github.com/Phala-Network/chainbridge-utils/core"
 
 	"github.com/ChainSafe/log15"
-	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
+	utils "github.com/litentry/ChainBridge/shared/substrate"
 )
 
 var _ core.Writer = &writer{}

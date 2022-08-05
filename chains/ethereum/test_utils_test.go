@@ -10,12 +10,12 @@ import (
 	"time"
 
 	"github.com/ChainSafe/log15"
-	"github.com/Phala-Network/ChainBridge/bindings/Bridge"
-	connection "github.com/Phala-Network/ChainBridge/connections/ethereum"
-	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/litentry/ChainBridge/bindings/Bridge"
+	connection "github.com/litentry/ChainBridge/connections/ethereum"
+	utils "github.com/litentry/ChainBridge/shared/ethereum"
 )
 
 const TestEndpoint = "ws://localhost:8545"

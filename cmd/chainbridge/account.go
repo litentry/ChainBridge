@@ -12,12 +12,12 @@ import (
 	"strconv"
 
 	log "github.com/ChainSafe/log15"
-	"github.com/Phala-Network/ChainBridge/config"
 	"github.com/Phala-Network/chainbridge-utils/crypto"
 	"github.com/Phala-Network/chainbridge-utils/crypto/secp256k1"
 	"github.com/Phala-Network/chainbridge-utils/crypto/sr25519"
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	gokeystore "github.com/ethereum/go-ethereum/accounts/keystore"
+	"github.com/litentry/ChainBridge/config"
 	"github.com/urfave/cli/v2"
 )
 

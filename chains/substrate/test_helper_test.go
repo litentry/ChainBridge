@@ -8,11 +8,11 @@ import (
 	"testing"
 
 	"github.com/ChainSafe/log15"
-	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	utils "github.com/litentry/ChainBridge/shared/substrate"
 )
 
 const TestEndpoint = "ws://127.0.0.1:9944"

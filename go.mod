@@ -1,4 +1,4 @@
-module github.com/Phala-Network/ChainBridge
+module github.com/litentry/ChainBridge
 
 go 1.15
 
