@@ -4,8 +4,8 @@
 package utils
 
 import (
-	events "github.com/Phala-Network/chainbridge-substrate-events"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
+	events "github.com/zhizming-zhong/chainbridge-substrate-events"
 )
 
 type EventErc721Minted struct {
