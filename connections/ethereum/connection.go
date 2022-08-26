@@ -187,7 +187,6 @@ func (c *Connection) UnlockOpts() {
 // LatestBlock returns the latest block from the current chain
 func (c *Connection) LatestBlock() (*big.Int, error) {
 	header, err := c.conn.HeaderByNumber(context.Background(), nil)
-	c.log.Info("query block...")
 	if err != nil {
 		return nil, err
 	}
