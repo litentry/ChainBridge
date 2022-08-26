@@ -127,20 +127,24 @@ func (c *Connection) CallOpts() *bind.CallOpts {
 
 func (c *Connection) SafeEstimateGas(ctx context.Context) (*big.Int, error) {
 
-	suggestedGasPrice, err := c.conn.SuggestGasPrice(context.TODO())
+	//suggestedGasPrice, err := c.conn.SuggestGasPrice(context.TODO())
+	//
+	//if err != nil {
+	//	return nil, err
+	//}
+	//
+	//gasPrice := multiplyGasPrice(suggestedGasPrice, c.gasMultiplier)
+	//
+	//// Check we aren't exceeding our limit
+	//if gasPrice.Cmp(c.maxGasPrice) == 1 {
+	//	return c.maxGasPrice, nil
+	//} else {
+	//	return gasPrice, nil
+	//}
 
-	if err != nil {
-		return nil, err
-	}
-
-	gasPrice := multiplyGasPrice(suggestedGasPrice, c.gasMultiplier)
-
-	// Check we aren't exceeding our limit
-	if gasPrice.Cmp(c.maxGasPrice) == 1 {
-		return c.maxGasPrice, nil
-	} else {
-		return gasPrice, nil
-	}
+	// issue: https://github.com/litentry/litentry-parachain/issues/776
+	// TODO find a better solution
+	return c.maxGasPrice, nil
 }
 
 func multiplyGasPrice(gasEstimate *big.Int, gasMultiplier *big.Float) *big.Int {
@@ -183,6 +187,7 @@ func (c *Connection) UnlockOpts() {
 // LatestBlock returns the latest block from the current chain
 func (c *Connection) LatestBlock() (*big.Int, error) {
 	header, err := c.conn.HeaderByNumber(context.Background(), nil)
+	c.log.Info("query block...")
 	if err != nil {
 		return nil, err
 	}
