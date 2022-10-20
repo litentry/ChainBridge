@@ -9,9 +9,9 @@ import (
 	"math/big"
 	"time"
 
+	log "github.com/ChainSafe/log15"
 	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	log "github.com/ChainSafe/log15"
 )
 
 // Number of blocks to wait for an finalization event
@@ -265,6 +265,7 @@ func (w *writer) voteProposal(m msg.Message, dataHash [32]byte) {
 			w.conn.UnlockOpts()
 
 			if err == nil {
+				w.conn.IncreaseNonce()
 				w.log.Info("Submitted proposal vote", "tx", tx.Hash(), "src", m.Source, "depositNonce", m.DepositNonce)
 				if w.metrics != nil {
 					w.metrics.VotesSubmitted.Inc()
@@ -312,6 +313,7 @@ func (w *writer) executeProposal(m msg.Message, data []byte, dataHash [32]byte) 
 			w.conn.UnlockOpts()
 
 			if err == nil {
+				w.conn.IncreaseNonce()
 				w.log.Info("Submitted proposal execution", "tx", tx.Hash(), "src", m.Source, "dst", m.Destination, "nonce", m.DepositNonce)
 				return
 			} else if err.Error() == ErrNonceTooLow.Error() || err.Error() == ErrTxUnderpriced.Error() {
