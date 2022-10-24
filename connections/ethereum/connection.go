@@ -81,12 +81,13 @@ func (c *Connection) Connect() error {
 	return nil
 }
 
-func (c *Connection) unsafeNonce(address ethcommon.Address) (uint64, error) {
+func (c *Connection) UnsafeNonce(address ethcommon.Address) (uint64, error) {
 	// Sync on-chain nonce
-	nonce, err := c.conn.NonceAt(context.Background(), address, nil)
+	nonce, err := c.conn.PendingNonceAt(context.Background(), address)
 	if err != nil {
 		return 0, err
 	}
+	c.log.Info("Nonce compare", "storenonce", c.nonce, "onchainnonce", nonce)
 	if c.nonce >= nonce {
 		return c.nonce, nil
 	} else {
@@ -96,10 +97,12 @@ func (c *Connection) unsafeNonce(address ethcommon.Address) (uint64, error) {
 }
 
 // LockAndIncreaseNonce acquires a lock on the opts before increase nonce by 1
-// and gas price.
-func (c *Connection) IncreaseNonce() {
+func (c *Connection) LockAndIncreaseNonce() {
 	c.nonceLock.Lock()
 	c.nonce += 1
+}
+
+func (c *Connection) UnlockNonce() {
 	c.nonceLock.Unlock()
 }
 
@@ -108,7 +111,7 @@ func (c *Connection) newTransactOpts(value, gasLimit, gasPrice *big.Int) (*bind.
 	privateKey := c.kp.PrivateKey()
 	address := ethcrypto.PubkeyToAddress(privateKey.PublicKey)
 
-	nonce, err := c.unsafeNonce(address)
+	nonce, err := c.UnsafeNonce(address)
 	if err != nil {
 		return nil, 0, err
 	}
@@ -190,13 +193,13 @@ func (c *Connection) LockAndUpdateOpts() error {
 	}
 	c.opts.GasPrice = gasPrice
 
-	nonce, err := c.unsafeNonce(c.opts.From)
+	nonce, err := c.UnsafeNonce(c.opts.From)
 	if err != nil {
 		c.optsLock.Unlock()
 		return err
 	}
 	c.opts.Nonce.SetUint64(nonce)
-	c.log.Info("LockAndUpdateOpts: update opts nonce to: ", nonce)
+	c.log.Info("Update opts", "nonce", nonce)
 	return nil
 }
 

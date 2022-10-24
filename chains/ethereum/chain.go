@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/ChainSafe/log15"
 	bridge "github.com/Phala-Network/ChainBridge/bindings/Bridge"
 	erc20Handler "github.com/Phala-Network/ChainBridge/bindings/ERC20Handler"
 	erc721Handler "github.com/Phala-Network/ChainBridge/bindings/ERC721Handler"
@@ -35,7 +36,6 @@ import (
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/ChainSafe/log15"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -52,7 +52,8 @@ type Connection interface {
 	CallOpts() *bind.CallOpts
 	LockAndUpdateOpts() error
 	UnlockOpts()
-	IncreaseNonce()
+	LockAndIncreaseNonce()
+	UnlockNonce()
 	Client() *ethclient.Client
 	EnsureHasBytecode(address common.Address) error
 	LatestBlock() (*big.Int, error)
