@@ -111,7 +111,7 @@ func (c *Connection) newTransactOpts(value, gasLimit, gasPrice *big.Int) (*bind.
 	privateKey := c.kp.PrivateKey()
 	address := ethcrypto.PubkeyToAddress(privateKey.PublicKey)
 
-	nonce, err := c.UnsafeNonce(address)
+	nonce, err := c.conn.PendingNonceAt(context.Background(), address)
 	if err != nil {
 		return nil, 0, err
 	}
@@ -197,7 +197,7 @@ func (c *Connection) LockAndUpdateOpts() error {
 	}
 	c.opts.GasPrice = gasPrice
 
-	nonce, err := c.UnsafeNonce(c.opts.From)
+	nonce, err := c.conn.PendingNonceAt(context.Background(), c.opts.From)
 	if err != nil {
 		c.optsLock.Unlock()
 		return err
