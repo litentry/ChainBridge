@@ -31,12 +31,13 @@ type Connection struct {
 	gasMultiplier *big.Float
 	conn          *ethclient.Client
 	// signer    ethtypes.Signer
-	opts     *bind.TransactOpts
-	callOpts *bind.CallOpts
-	nonce    uint64
-	optsLock sync.Mutex
-	log      log15.Logger
-	stop     chan int // All routines should exit when this channel is closed
+	opts      *bind.TransactOpts
+	callOpts  *bind.CallOpts
+	nonce     uint64
+	nonceLock sync.Mutex
+	optsLock  sync.Mutex
+	log       log15.Logger
+	stop      chan int // All routines should exit when this channel is closed
 }
 
 // NewConnection returns an uninitialized connection, must call Connection.Connect() before using.
@@ -80,12 +81,37 @@ func (c *Connection) Connect() error {
 	return nil
 }
 
+func (c *Connection) UnsafeNonce(address ethcommon.Address) (uint64, error) {
+	// Sync on-chain nonce
+	nonce, err := c.conn.PendingNonceAt(context.Background(), address)
+	if err != nil {
+		return 0, err
+	}
+	c.log.Info("Nonce compare", "storenonce", c.nonce, "onchainnonce", nonce)
+	if c.nonce >= nonce {
+		return c.nonce, nil
+	} else {
+		c.nonce = nonce
+		return nonce, nil
+	}
+}
+
+// LockAndIncreaseNonce acquires a lock on the opts before increase nonce by 1
+func (c *Connection) LockAndIncreaseNonce() {
+	c.nonceLock.Lock()
+	c.nonce += 1
+}
+
+func (c *Connection) UnlockNonce() {
+	c.nonceLock.Unlock()
+}
+
 // newTransactOpts builds the TransactOpts for the connection's keypair.
 func (c *Connection) newTransactOpts(value, gasLimit, gasPrice *big.Int) (*bind.TransactOpts, uint64, error) {
 	privateKey := c.kp.PrivateKey()
 	address := ethcrypto.PubkeyToAddress(privateKey.PublicKey)
 
-	nonce, err := c.conn.PendingNonceAt(context.Background(), address)
+	nonce, err := c.UnsafeNonce(address)
 	if err != nil {
 		return nil, 0, err
 	}
@@ -171,12 +197,13 @@ func (c *Connection) LockAndUpdateOpts() error {
 	}
 	c.opts.GasPrice = gasPrice
 
-	nonce, err := c.conn.PendingNonceAt(context.Background(), c.opts.From)
+	nonce, err := c.UnsafeNonce(c.opts.From)
 	if err != nil {
 		c.optsLock.Unlock()
 		return err
 	}
 	c.opts.Nonce.SetUint64(nonce)
+	c.log.Info("Update opts", "nonce", nonce)
 	return nil
 }
 
