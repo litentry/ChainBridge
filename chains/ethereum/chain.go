@@ -54,8 +54,6 @@ type Connection interface {
 	CallOpts() *bind.CallOpts
 	LockAndUpdateOpts() error
 	UnlockOpts()
-	LockAndIncreaseNonce()
-	UnlockNonce()
 	Client() *ethclient.Client
 	EnsureHasBytecode(address common.Address) error
 	LatestBlock() (*big.Int, error)

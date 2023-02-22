@@ -81,30 +81,30 @@ func (c *Connection) Connect() error {
 	return nil
 }
 
-func (c *Connection) UnsafeNonce(address ethcommon.Address) (uint64, error) {
-	// Sync on-chain nonce
-	nonce, err := c.conn.PendingNonceAt(context.Background(), address)
-	if err != nil {
-		return 0, err
-	}
-	c.log.Info("Nonce compare", "storenonce", c.nonce, "onchainnonce", nonce)
-	if c.nonce >= nonce {
-		return c.nonce, nil
-	} else {
-		c.nonce = nonce
-		return nonce, nil
-	}
-}
+// func (c *Connection) UnsafeNonce(address ethcommon.Address) (uint64, error) {
+// 	// Sync on-chain nonce
+// 	nonce, err := c.conn.PendingNonceAt(context.Background(), address)
+// 	if err != nil {
+// 		return 0, err
+// 	}
+// 	c.log.Info("Nonce compare", "storenonce", c.nonce, "onchainnonce", nonce)
+// 	if c.nonce >= nonce {
+// 		return c.nonce, nil
+// 	} else {
+// 		c.nonce = nonce
+// 		return nonce, nil
+// 	}
+// }
 
-// LockAndIncreaseNonce acquires a lock on the opts before increase nonce by 1
-func (c *Connection) LockAndIncreaseNonce() {
-	c.nonceLock.Lock()
-	c.nonce += 1
-}
+// // LockAndIncreaseNonce acquires a lock on the opts before increase nonce by 1
+// func (c *Connection) LockAndIncreaseNonce() {
+// 	c.nonceLock.Lock()
+// 	c.nonce += 1
+// }
 
-func (c *Connection) UnlockNonce() {
-	c.nonceLock.Unlock()
-}
+// func (c *Connection) UnlockNonce() {
+// 	c.nonceLock.Unlock()
+// }
 
 // newTransactOpts builds the TransactOpts for the connection's keypair.
 func (c *Connection) newTransactOpts(value, gasLimit, gasPrice *big.Int) (*bind.TransactOpts, uint64, error) {
