@@ -26,6 +26,7 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
+	_ = abi.ConvertType
 )
 
 // ERC721PausableMetaData contains all meta data concerning the ERC721Pausable contract.
@@ -134,11 +135,11 @@ func NewERC721PausableFilterer(address common.Address, filterer bind.ContractFil
 
 // bindERC721Pausable binds a generic wrapper to an already deployed contract.
 func bindERC721Pausable(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(ERC721PausableABI))
+	parsed, err := ERC721PausableMetaData.GetAbi()
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and

@@ -26,12 +26,13 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
+	_ = abi.ConvertType
 )
 
 // NoArgumentMetaData contains all meta data concerning the NoArgument contract.
 var NoArgumentMetaData = &bind.MetaData{
 	ABI: "[{\"anonymous\":false,\"inputs\":[],\"name\":\"NoArgumentCalled\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"noArgument\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
-	Bin: "0x6080604052348015600f57600080fd5b5060998061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063568959ca14602d575b600080fd5b60336035565b005b7fc582abe1670c5a7f7cad8f171e4af03c793dd9f59fee6714179f56b6e9aea26f60405160405180910390a156fea2646970667358221220e4e7b27e53a399b1ec8957753f962285300490f3a3426d0f1587da8d8cdfa4fc64736f6c63430007000033",
+	Bin: "0x6080604052348015600f57600080fd5b5060998061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063568959ca14602d575b600080fd5b60336035565b005b7fc582abe1670c5a7f7cad8f171e4af03c793dd9f59fee6714179f56b6e9aea26f60405160405180910390a156fea2646970667358221220c5eeb73fcd17f1f7f8832bb0cb4877f776c49f685c2134dd86a186b054b4c4c464736f6c63430007000033",
 }
 
 // NoArgumentABI is the input ABI used to generate the binding from.
@@ -156,11 +157,11 @@ func NewNoArgumentFilterer(address common.Address, filterer bind.ContractFiltere
 
 // bindNoArgument binds a generic wrapper to an already deployed contract.
 func bindNoArgument(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(NoArgumentABI))
+	parsed, err := NoArgumentMetaData.GetAbi()
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and

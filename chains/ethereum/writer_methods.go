@@ -94,14 +94,18 @@ func (w *writer) createErc20Proposal(m msg.Message) bool {
 
 	if !w.shouldVote(m, dataHash) {
 		if w.proposalIsPassed(m.Source, m.DepositNonce, dataHash) {
-			// We should not vote for this proposal but it is ready to be executed
-			w.executeProposal(m, data, dataHash)
+			// In current logic, if execution right after vote pass fails, then retry is meaningless, we remove this logic
+			// Yet we keep the hook here for convenience
+			// // We should not vote for this proposal but it is ready to be executed
+			// w.executeProposal(m, data, dataHash)
 			return true
 		} else {
 			return false
 		}
 	}
 
+	// The latestBlock Info is nolonger needed
+	// However it may be neccessary to keep which served as heartbeat check
 	// Capture latest block so when know where to watch from
 	latestBlock, err := w.conn.LatestBlock()
 	if err != nil {
@@ -109,10 +113,11 @@ func (w *writer) createErc20Proposal(m msg.Message) bool {
 		return false
 	}
 
-	// watch for execution event
-	go w.watchThenExecute(m, data, dataHash, latestBlock)
+	// // TODO: Remove the comment of non-existing execution logic
+	// // watch for execution event
+	// go w.watchThenExecute(m, data, dataHash, latestBlock)
 
-	w.voteProposal(m, dataHash)
+	w.voteProposal(m, dataHash, data)
 
 	return true
 }
@@ -127,14 +132,18 @@ func (w *writer) createErc721Proposal(m msg.Message) bool {
 
 	if !w.shouldVote(m, dataHash) {
 		if w.proposalIsPassed(m.Source, m.DepositNonce, dataHash) {
-			// We should not vote for this proposal but it is ready to be executed
-			w.executeProposal(m, data, dataHash)
+			// In current logic, if execution right after vote pass fails, then retry is meaningless, we remove this logic
+			// Yet we keep the hook here for convenience
+			// // We should not vote for this proposal but it is ready to be executed
+			// w.executeProposal(m, data, dataHash)
 			return true
 		} else {
 			return false
 		}
 	}
 
+	// The latestBlock Info is nolonger needed
+	// However it may be neccessary to keep which served as heartbeat check
 	// Capture latest block so we know where to watch from
 	latestBlock, err := w.conn.LatestBlock()
 	if err != nil {
@@ -142,10 +151,11 @@ func (w *writer) createErc721Proposal(m msg.Message) bool {
 		return false
 	}
 
-	// watch for execution event
-	go w.watchThenExecute(m, data, dataHash, latestBlock)
+	// // TODO: Remove the comment of non-existing execution logic
+	// // watch for execution event
+	// go w.watchThenExecute(m, data, dataHash, latestBlock)
 
-	w.voteProposal(m, dataHash)
+	w.voteProposal(m, dataHash, data)
 
 	return true
 }
@@ -162,14 +172,18 @@ func (w *writer) createGenericDepositProposal(m msg.Message) bool {
 
 	if !w.shouldVote(m, dataHash) {
 		if w.proposalIsPassed(m.Source, m.DepositNonce, dataHash) {
-			// We should not vote for this proposal but it is ready to be executed
-			w.executeProposal(m, data, dataHash)
+			// In current logic, if execution right after vote pass fails, then retry is meaningless, we remove this logic
+			// Yet we keep the hook here for convenience
+			// // We should not vote for this proposal but it is ready to be executed
+			// w.executeProposal(m, data, dataHash)
 			return true
 		} else {
 			return false
 		}
 	}
 
+	// The latestBlock Info is nolonger needed
+	// However it may be neccessary to keep which served as heartbeat check
 	// Capture latest block so when know where to watch from
 	latestBlock, err := w.conn.LatestBlock()
 	if err != nil {
@@ -177,73 +191,75 @@ func (w *writer) createGenericDepositProposal(m msg.Message) bool {
 		return false
 	}
 
-	// watch for execution event
-	go w.watchThenExecute(m, data, dataHash, latestBlock)
+	// // TODO: Remove the comment of non-existing execution logic
+	// // watch for execution event
+	// go w.watchThenExecute(m, data, dataHash, latestBlock)
 
-	w.voteProposal(m, dataHash)
+	w.voteProposal(m, dataHash, data)
 
 	return true
 }
 
-// watchThenExecute watches for the latest block and executes once the matching finalized event is found
-func (w *writer) watchThenExecute(m msg.Message, data []byte, dataHash [32]byte, latestBlock *big.Int) {
-	w.log.Info("Watching for finalization event", "src", m.Source, "nonce", m.DepositNonce)
+// // This method is disabled since smart contract now triggering execution right after vote reach threshold
+// // watchThenExecute watches for the latest block and executes once the matching finalized event is found
+// func (w *writer) watchThenExecute(m msg.Message, data []byte, dataHash [32]byte, latestBlock *big.Int) {
+// 	w.log.Info("Watching for finalization event", "src", m.Source, "nonce", m.DepositNonce)
 
-	// watching for the latest block, querying and matching the finalized event will be retried up to ExecuteBlockWatchLimit times
-	for i := 0; i < ExecuteBlockWatchLimit; i++ {
-		select {
-		case <-w.stop:
-			return
-		default:
-			// watch for the lastest block, retry up to BlockRetryLimit times
-			for waitRetrys := 0; waitRetrys < BlockRetryLimit; waitRetrys++ {
-				err := w.conn.WaitForBlock(latestBlock, w.cfg.blockConfirmations)
-				if err != nil {
-					w.log.Error("Waiting for block failed", "err", err)
-					// Exit if retries exceeded
-					if waitRetrys+1 == BlockRetryLimit {
-						w.log.Error("Waiting for block retries exceeded, shutting down")
-						w.sysErr <- ErrFatalQuery
-						return
-					}
-				} else {
-					break
-				}
-			}
+// 	// watching for the latest block, querying and matching the finalized event will be retried up to ExecuteBlockWatchLimit times
+// 	for i := 0; i < ExecuteBlockWatchLimit; i++ {
+// 		select {
+// 		case <-w.stop:
+// 			return
+// 		default:
+// 			// watch for the lastest block, retry up to BlockRetryLimit times
+// 			for waitRetrys := 0; waitRetrys < BlockRetryLimit; waitRetrys++ {
+// 				err := w.conn.WaitForBlock(latestBlock, w.cfg.blockConfirmations)
+// 				if err != nil {
+// 					w.log.Error("Waiting for block failed", "err", err)
+// 					// Exit if retries exceeded
+// 					if waitRetrys+1 == BlockRetryLimit {
+// 						w.log.Error("Waiting for block retries exceeded, shutting down")
+// 						w.sysErr <- ErrFatalQuery
+// 						return
+// 					}
+// 				} else {
+// 					break
+// 				}
+// 			}
 
-			// query for logs
-			query := buildQuery(w.cfg.bridgeContract, utils.ProposalEvent, latestBlock, latestBlock)
-			evts, err := w.conn.Client().FilterLogs(context.Background(), query)
-			if err != nil {
-				w.log.Error("Failed to fetch logs", "err", err)
-				return
-			}
+// 			// query for logs
+// 			query := buildQuery(w.cfg.bridgeContract, utils.ProposalEvent, latestBlock, latestBlock)
+// 			evts, err := w.conn.Client().FilterLogs(context.Background(), query)
+// 			if err != nil {
+// 				w.log.Error("Failed to fetch logs", "err", err)
+// 				return
+// 			}
 
-			// execute the proposal once we find the matching finalized event
-			for _, evt := range evts {
-				sourceId := evt.Topics[1].Big().Uint64()
-				depositNonce := evt.Topics[2].Big().Uint64()
-				status := evt.Topics[3].Big().Uint64()
+// 			// execute the proposal once we find the matching finalized event
+// 			for _, evt := range evts {
+// 				sourceId := evt.Topics[1].Big().Uint64()
+// 				depositNonce := evt.Topics[2].Big().Uint64()
+// 				status := evt.Topics[3].Big().Uint64()
 
-				if m.Source == msg.ChainId(sourceId) &&
-					m.DepositNonce.Big().Uint64() == depositNonce &&
-					utils.IsFinalized(uint8(status)) {
-					w.executeProposal(m, data, dataHash)
-					return
-				} else {
-					w.log.Trace("Ignoring event", "src", sourceId, "nonce", depositNonce)
-				}
-			}
-			w.log.Trace("No finalization event found in current block", "block", latestBlock, "src", m.Source, "nonce", m.DepositNonce)
-			latestBlock = latestBlock.Add(latestBlock, big.NewInt(1))
-		}
-	}
-	log.Warn("Block watch limit exceeded, skipping execution", "source", m.Source, "dest", m.Destination, "nonce", m.DepositNonce)
-}
+// 				if m.Source == msg.ChainId(sourceId) &&
+// 					m.DepositNonce.Big().Uint64() == depositNonce &&
+// 					utils.IsFinalized(uint8(status)) {
+// 					w.executeProposal(m, data, dataHash)
+// 					return
+// 				} else {
+// 					w.log.Trace("Ignoring event", "src", sourceId, "nonce", depositNonce)
+// 				}
+// 			}
+// 			w.log.Trace("No finalization event found in current block", "block", latestBlock, "src", m.Source, "nonce", m.DepositNonce)
+// 			latestBlock = latestBlock.Add(latestBlock, big.NewInt(1))
+// 		}
+// 	}
+// 	log.Warn("Block watch limit exceeded, skipping execution", "source", m.Source, "dest", m.Destination, "nonce", m.DepositNonce)
+// }
 
 // voteProposal submits a vote proposal
 // a vote proposal will try to be submitted up to the TxRetryLimit times
-func (w *writer) voteProposal(m msg.Message, dataHash [32]byte) {
+func (w *writer) voteProposal(m msg.Message, dataHash [32]byte, data []byte) {
 	for i := 0; i < TxRetryLimit; i++ {
 		select {
 		case <-w.stop:
@@ -260,7 +276,7 @@ func (w *writer) voteProposal(m msg.Message, dataHash [32]byte) {
 				uint8(m.Source),
 				uint64(m.DepositNonce),
 				m.ResourceId,
-				dataHash,
+				data,
 			)
 			w.conn.UnlockOpts()
 
@@ -291,49 +307,50 @@ func (w *writer) voteProposal(m msg.Message, dataHash [32]byte) {
 	w.sysErr <- ErrFatalTx
 }
 
-// executeProposal executes the proposal
-func (w *writer) executeProposal(m msg.Message, data []byte, dataHash [32]byte) {
-	for i := 0; i < TxRetryLimit; i++ {
-		select {
-		case <-w.stop:
-			return
-		default:
-			err := w.conn.LockAndUpdateOpts()
-			if err != nil {
-				w.log.Error("Failed to update nonce", "err", err)
-				return
-			}
+// // This method is disabled since smart contract now triggering execution right after vote reach threshold
+// // executeProposal executes the proposal
+// func (w *writer) executeProposal(m msg.Message, data []byte, dataHash [32]byte) {
+// 	for i := 0; i < TxRetryLimit; i++ {
+// 		select {
+// 		case <-w.stop:
+// 			return
+// 		default:
+// 			err := w.conn.LockAndUpdateOpts()
+// 			if err != nil {
+// 				w.log.Error("Failed to update nonce", "err", err)
+// 				return
+// 			}
 
-			tx, err := w.bridgeContract.ExecuteProposal(
-				w.conn.Opts(),
-				uint8(m.Source),
-				uint64(m.DepositNonce),
-				data,
-				m.ResourceId,
-			)
-			w.conn.UnlockOpts()
+// 			tx, err := w.bridgeContract.ExecuteProposal(
+// 				w.conn.Opts(),
+// 				uint8(m.Source),
+// 				uint64(m.DepositNonce),
+// 				data,
+// 				m.ResourceId,
+// 			)
+// 			w.conn.UnlockOpts()
 
-			if err == nil {
-				w.conn.LockAndIncreaseNonce()
-				w.conn.UnlockNonce()
-				w.log.Info("Submitted proposal execution", "tx", tx.Hash(), "src", m.Source, "dst", m.Destination, "nonce", m.DepositNonce)
-				return
-			} else if err.Error() == ErrNonceTooLow.Error() || err.Error() == ErrTxUnderpriced.Error() {
-				w.log.Error("Nonce too low, will retry")
-				time.Sleep(TxRetryInterval)
-			} else {
-				w.log.Warn("Execution failed, proposal may already be complete", "err", err)
-				time.Sleep(TxRetryInterval)
-			}
+// 			if err == nil {
+// 				w.conn.LockAndIncreaseNonce()
+// 				w.conn.UnlockNonce()
+// 				w.log.Info("Submitted proposal execution", "tx", tx.Hash(), "src", m.Source, "dst", m.Destination, "nonce", m.DepositNonce)
+// 				return
+// 			} else if err.Error() == ErrNonceTooLow.Error() || err.Error() == ErrTxUnderpriced.Error() {
+// 				w.log.Error("Nonce too low, will retry")
+// 				time.Sleep(TxRetryInterval)
+// 			} else {
+// 				w.log.Warn("Execution failed, proposal may already be complete", "err", err)
+// 				time.Sleep(TxRetryInterval)
+// 			}
 
-			// Verify proposal is still open for execution, tx will fail if we aren't the first to execute,
-			// but there is no need to retry
-			if w.proposalIsFinalized(m.Source, m.DepositNonce, dataHash) {
-				w.log.Info("Proposal finalized on chain", "src", m.Source, "dst", m.Destination, "nonce", m.DepositNonce)
-				return
-			}
-		}
-	}
-	w.log.Error("Submission of Execute transaction failed", "source", m.Source, "dest", m.Destination, "depositNonce", m.DepositNonce)
-	w.sysErr <- ErrFatalTx
-}
+// 			// Verify proposal is still open for execution, tx will fail if we aren't the first to execute,
+// 			// but there is no need to retry
+// 			if w.proposalIsFinalized(m.Source, m.DepositNonce, dataHash) {
+// 				w.log.Info("Proposal finalized on chain", "src", m.Source, "dst", m.Destination, "nonce", m.DepositNonce)
+// 				return
+// 			}
+// 		}
+// 	}
+// 	w.log.Error("Submission of Execute transaction failed", "source", m.Source, "dest", m.Destination, "depositNonce", m.DepositNonce)
+// 	w.sysErr <- ErrFatalTx
+// }

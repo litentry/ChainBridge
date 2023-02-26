@@ -2,8 +2,8 @@
 # Copyright 2020 ChainSafe Systems
 # SPDX-License-Identifier: LGPL-3.0-only
 
-CONTRACTS_REPO="https://github.com/Phala-Network/chainbridge-solidity.git"
-CONTRACTS_TAG="btclottery"
+CONTRACTS_REPO="https://github.com/litentry/chainbridge-solidity.git"
+CONTRACTS_TAG="minqi-dev"
 CONTRACTS_DIR="./solidity"
 DEST_DIR="./bindings"
 

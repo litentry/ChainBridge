@@ -26,6 +26,7 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
+	_ = abi.ConvertType
 )
 
 // ERC20BurnableMetaData contains all meta data concerning the ERC20Burnable contract.
@@ -134,11 +135,11 @@ func NewERC20BurnableFilterer(address common.Address, filterer bind.ContractFilt
 
 // bindERC20Burnable binds a generic wrapper to an already deployed contract.
 func bindERC20Burnable(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(ERC20BurnableABI))
+	parsed, err := ERC20BurnableMetaData.GetAbi()
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and

@@ -26,12 +26,13 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
+	_ = abi.ConvertType
 )
 
 // TwoArgumentsMetaData contains all meta data concerning the TwoArguments contract.
 var TwoArgumentsMetaData = &bind.MetaData{
 	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"argumentOne\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"bytes4\",\"name\":\"argumentTwo\",\"type\":\"bytes4\"}],\"name\":\"TwoArgumentsCalled\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"argumentOne\",\"type\":\"address[]\"},{\"internalType\":\"bytes4\",\"name\":\"argumentTwo\",\"type\":\"bytes4\"}],\"name\":\"twoArguments\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
-	Bin: "0x608060405234801561001057600080fd5b5061019a806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c806372e0745c14610030575b600080fd5b6100d06004803603604081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184602083028401116401000000008311171561009757600080fd5b909192939192939080357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff191690602001909291905050506100d2565b005b7fc983106aca50fad459fb18ede1630e8ff8147ff28ad451a856427931fd7f15e38383836040518080602001837bffffffffffffffffffffffffffffffffffffffffffffffffffffffff191681526020018281038252858582818152602001925060200280828437600081840152601f19601f82011690508083019250505094505050505060405180910390a150505056fea26469706673582212208da96746c5e7c3493e432dd08dd9c776994a72c70e7e580f089392e49c7e396264736f6c63430007000033",
+	Bin: "0x608060405234801561001057600080fd5b5061019a806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c806372e0745c14610030575b600080fd5b6100d06004803603604081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184602083028401116401000000008311171561009757600080fd5b909192939192939080357bffffffffffffffffffffffffffffffffffffffffffffffffffffffff191690602001909291905050506100d2565b005b7fc983106aca50fad459fb18ede1630e8ff8147ff28ad451a856427931fd7f15e38383836040518080602001837bffffffffffffffffffffffffffffffffffffffffffffffffffffffff191681526020018281038252858582818152602001925060200280828437600081840152601f19601f82011690508083019250505094505050505060405180910390a150505056fea2646970667358221220b39c64421ded33b4362dcaea5f7c21b31315c0137ab7fba5ad73b4adfedb5aa164736f6c63430007000033",
 }
 
 // TwoArgumentsABI is the input ABI used to generate the binding from.
@@ -156,11 +157,11 @@ func NewTwoArgumentsFilterer(address common.Address, filterer bind.ContractFilte
 
 // bindTwoArguments binds a generic wrapper to an already deployed contract.
 func bindTwoArguments(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(TwoArgumentsABI))
+	parsed, err := TwoArgumentsMetaData.GetAbi()
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and
