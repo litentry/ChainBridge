@@ -29,14 +29,14 @@ var (
 	_ = abi.ConvertType
 )
 
-// IGenericHandlerMetaData contains all meta data concerning the IGenericHandler contract.
-var IGenericHandlerMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"internalType\":\"bytes4\",\"name\":\"depositFunctionSig\",\"type\":\"bytes4\"},{\"internalType\":\"bytes4\",\"name\":\"executeFunctionSig\",\"type\":\"bytes4\"}],\"name\":\"setResource\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
-}
+// // IGenericHandlerMetaData contains all meta data concerning the IGenericHandler contract.
+// var IGenericHandlerMetaData = &bind.MetaData{
+// 	ABI: "[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"internalType\":\"bytes4\",\"name\":\"depositFunctionSig\",\"type\":\"bytes4\"},{\"internalType\":\"bytes4\",\"name\":\"executeFunctionSig\",\"type\":\"bytes4\"}],\"name\":\"setResource\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+// }
 
 // IGenericHandlerABI is the input ABI used to generate the binding from.
 // Deprecated: Use IGenericHandlerMetaData.ABI instead.
-var IGenericHandlerABI = IGenericHandlerMetaData.ABI
+var IGenericHandlerABI = "[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"internalType\":\"bytes4\",\"name\":\"depositFunctionSig\",\"type\":\"bytes4\"},{\"internalType\":\"bytes4\",\"name\":\"executeFunctionSig\",\"type\":\"bytes4\"}],\"name\":\"setResource\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
 
 // IGenericHandler is an auto generated Go binding around an Ethereum contract.
 type IGenericHandler struct {
@@ -135,7 +135,7 @@ func NewIGenericHandlerFilterer(address common.Address, filterer bind.ContractFi
 
 // bindIGenericHandler binds a generic wrapper to an already deployed contract.
 func bindIGenericHandler(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := IGenericHandlerMetaData.GetAbi()
+	parsed, err := abi.JSON(strings.NewReader(IGenericHandlerABI))
 	if err != nil {
 		return nil, err
 	}

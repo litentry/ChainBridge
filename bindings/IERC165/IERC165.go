@@ -29,14 +29,14 @@ var (
 	_ = abi.ConvertType
 )
 
-// IERC165MetaData contains all meta data concerning the IERC165 contract.
-var IERC165MetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
-}
+// // IERC165MetaData contains all meta data concerning the IERC165 contract.
+// var IERC165MetaData = &bind.MetaData{
+// 	ABI: "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+// }
 
 // IERC165ABI is the input ABI used to generate the binding from.
 // Deprecated: Use IERC165MetaData.ABI instead.
-var IERC165ABI = IERC165MetaData.ABI
+var IERC165ABI = "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
 
 // IERC165 is an auto generated Go binding around an Ethereum contract.
 type IERC165 struct {
@@ -135,7 +135,7 @@ func NewIERC165Filterer(address common.Address, filterer bind.ContractFilterer) 
 
 // bindIERC165 binds a generic wrapper to an already deployed contract.
 func bindIERC165(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := IERC165MetaData.GetAbi()
+	parsed, err := abi.JSON(strings.NewReader(IERC165ABI))
 	if err != nil {
 		return nil, err
 	}

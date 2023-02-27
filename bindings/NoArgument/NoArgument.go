@@ -29,23 +29,23 @@ var (
 	_ = abi.ConvertType
 )
 
-// NoArgumentMetaData contains all meta data concerning the NoArgument contract.
-var NoArgumentMetaData = &bind.MetaData{
-	ABI: "[{\"anonymous\":false,\"inputs\":[],\"name\":\"NoArgumentCalled\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"noArgument\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
-	Bin: "0x6080604052348015600f57600080fd5b5060998061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063568959ca14602d575b600080fd5b60336035565b005b7fc582abe1670c5a7f7cad8f171e4af03c793dd9f59fee6714179f56b6e9aea26f60405160405180910390a156fea2646970667358221220c5eeb73fcd17f1f7f8832bb0cb4877f776c49f685c2134dd86a186b054b4c4c464736f6c63430007000033",
-}
+// // NoArgumentMetaData contains all meta data concerning the NoArgument contract.
+// var NoArgumentMetaData = &bind.MetaData{
+// 	ABI: "[{\"anonymous\":false,\"inputs\":[],\"name\":\"NoArgumentCalled\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"noArgument\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+// 	Bin: "0x6080604052348015600f57600080fd5b5060998061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063568959ca14602d575b600080fd5b60336035565b005b7fc582abe1670c5a7f7cad8f171e4af03c793dd9f59fee6714179f56b6e9aea26f60405160405180910390a156fea264697066735822122061684fcffe6246de6b2916907fc7972697968c09b0fff3c92556347389c439fa64736f6c63430007000033",
+// }
 
 // NoArgumentABI is the input ABI used to generate the binding from.
 // Deprecated: Use NoArgumentMetaData.ABI instead.
-var NoArgumentABI = NoArgumentMetaData.ABI
+var NoArgumentABI = "[{\"anonymous\":false,\"inputs\":[],\"name\":\"NoArgumentCalled\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"noArgument\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
 
 // NoArgumentBin is the compiled bytecode used for deploying new contracts.
 // Deprecated: Use NoArgumentMetaData.Bin instead.
-var NoArgumentBin = NoArgumentMetaData.Bin
+var NoArgumentBin = "0x6080604052348015600f57600080fd5b5060998061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063568959ca14602d575b600080fd5b60336035565b005b7fc582abe1670c5a7f7cad8f171e4af03c793dd9f59fee6714179f56b6e9aea26f60405160405180910390a156fea264697066735822122061684fcffe6246de6b2916907fc7972697968c09b0fff3c92556347389c439fa64736f6c63430007000033"
 
 // DeployNoArgument deploys a new Ethereum contract, binding an instance of NoArgument to it.
 func DeployNoArgument(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *NoArgument, error) {
-	parsed, err := NoArgumentMetaData.GetAbi()
+	parsed, err := abi.JSON(strings.NewReader(NoArgumentABI))
 	if err != nil {
 		return common.Address{}, nil, nil, err
 	}
@@ -157,7 +157,7 @@ func NewNoArgumentFilterer(address common.Address, filterer bind.ContractFiltere
 
 // bindNoArgument binds a generic wrapper to an already deployed contract.
 func bindNoArgument(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := NoArgumentMetaData.GetAbi()
+	parsed, err := abi.JSON(strings.NewReader(NoArgumentABI))
 	if err != nil {
 		return nil, err
 	}

@@ -29,14 +29,14 @@ var (
 	_ = abi.ConvertType
 )
 
-// ERC165MetaData contains all meta data concerning the ERC165 contract.
-var ERC165MetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
-}
+// // ERC165MetaData contains all meta data concerning the ERC165 contract.
+// var ERC165MetaData = &bind.MetaData{
+// 	ABI: "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+// }
 
 // ERC165ABI is the input ABI used to generate the binding from.
 // Deprecated: Use ERC165MetaData.ABI instead.
-var ERC165ABI = ERC165MetaData.ABI
+var ERC165ABI = "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
 
 // ERC165 is an auto generated Go binding around an Ethereum contract.
 type ERC165 struct {
@@ -135,7 +135,7 @@ func NewERC165Filterer(address common.Address, filterer bind.ContractFilterer) (
 
 // bindERC165 binds a generic wrapper to an already deployed contract.
 func bindERC165(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := ERC165MetaData.GetAbi()
+	parsed, err := abi.JSON(strings.NewReader(ERC165ABI))
 	if err != nil {
 		return nil, err
 	}
