@@ -4,7 +4,6 @@
 package ThreeArguments
 
 import (
-	"errors"
 	"math/big"
 	"strings"
 
@@ -18,7 +17,6 @@ import (
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
-	_ = errors.New
 	_ = big.NewInt
 	_ = strings.NewReader
 	_ = ethereum.NotFound
@@ -26,22 +24,13 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
-	_ = abi.ConvertType
 )
 
-// // ThreeArgumentsMetaData contains all meta data concerning the ThreeArguments contract.
-// var ThreeArgumentsMetaData = &bind.MetaData{
-// 	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"ThreeArgumentsCalled\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"threeArguments\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
-// 	Bin: "0x608060405234801561001057600080fd5b50610176806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c80639280b90514610030575b600080fd5b6100c06004803603606081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184600183028401116401000000008311171561009757600080fd5b9091929391929390803560000b90602001909291908035151590602001909291905050506100c2565b005b7fd589183661fa75f94e2db32f4eb7ebb50f4154c160e15eb43f772a46f360a3a88484848460405180806020018460000b815260200183151581526020018281038252868682818152602001925080828437600081840152601f19601f8201169050808301925050509550505050505060405180910390a15050505056fea26469706673582212204c3d4ca7beef384388449d8c307caeeca2f7f43003ba9afe146b97ba0f61f0e664736f6c63430007000033",
-// }
-
 // ThreeArgumentsABI is the input ABI used to generate the binding from.
-// Deprecated: Use ThreeArgumentsMetaData.ABI instead.
-var ThreeArgumentsABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"ThreeArgumentsCalled\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"threeArguments\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+const ThreeArgumentsABI = "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"ThreeArgumentsCalled\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"threeArguments\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
 
 // ThreeArgumentsBin is the compiled bytecode used for deploying new contracts.
-// Deprecated: Use ThreeArgumentsMetaData.Bin instead.
-var ThreeArgumentsBin = "0x608060405234801561001057600080fd5b50610176806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c80639280b90514610030575b600080fd5b6100c06004803603606081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184600183028401116401000000008311171561009757600080fd5b9091929391929390803560000b90602001909291908035151590602001909291905050506100c2565b005b7fd589183661fa75f94e2db32f4eb7ebb50f4154c160e15eb43f772a46f360a3a88484848460405180806020018460000b815260200183151581526020018281038252868682818152602001925080828437600081840152601f19601f8201169050808301925050509550505050505060405180910390a15050505056fea26469706673582212204c3d4ca7beef384388449d8c307caeeca2f7f43003ba9afe146b97ba0f61f0e664736f6c63430007000033"
+var ThreeArgumentsBin = "0x608060405234801561001057600080fd5b50610176806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c80639280b90514610030575b600080fd5b6100c06004803603606081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184600183028401116401000000008311171561009757600080fd5b9091929391929390803560000b90602001909291908035151590602001909291905050506100c2565b005b7fd589183661fa75f94e2db32f4eb7ebb50f4154c160e15eb43f772a46f360a3a88484848460405180806020018460000b815260200183151581526020018281038252868682818152602001925080828437600081840152601f19601f8201169050808301925050509550505050505060405180910390a15050505056fea264697066735822122040131e468f9c11a5a510df457532101ae7c5522ca01c6414f34859f9c9b16bc264736f6c63430007000033"
 
 // DeployThreeArguments deploys a new Ethereum contract, binding an instance of ThreeArguments to it.
 func DeployThreeArguments(auth *bind.TransactOpts, backend bind.ContractBackend) (common.Address, *types.Transaction, *ThreeArguments, error) {
@@ -49,11 +38,8 @@ func DeployThreeArguments(auth *bind.TransactOpts, backend bind.ContractBackend)
 	if err != nil {
 		return common.Address{}, nil, nil, err
 	}
-	if parsed == nil {
-		return common.Address{}, nil, nil, errors.New("GetABI returned nil")
-	}
 
-	address, tx, contract, err := bind.DeployContract(auth, *parsed, common.FromHex(ThreeArgumentsBin), backend)
+	address, tx, contract, err := bind.DeployContract(auth, parsed, common.FromHex(ThreeArgumentsBin), backend)
 	if err != nil {
 		return common.Address{}, nil, nil, err
 	}
@@ -161,7 +147,7 @@ func bindThreeArguments(address common.Address, caller bind.ContractCaller, tran
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and

@@ -4,12 +4,12 @@
 package ethereum
 
 import (
-	"context"
+	// "context"
 	"errors"
-	"math/big"
+	// "math/big"
 	"time"
 
-	log "github.com/ChainSafe/log15"
+	// log "github.com/ChainSafe/log15"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	utils "github.com/litentry/ChainBridge/shared/ethereum"
 )
@@ -107,7 +107,7 @@ func (w *writer) createErc20Proposal(m msg.Message) bool {
 	// The latestBlock Info is nolonger needed
 	// However it may be neccessary to keep which served as heartbeat check
 	// Capture latest block so when know where to watch from
-	latestBlock, err := w.conn.LatestBlock()
+	_, err := w.conn.LatestBlock()
 	if err != nil {
 		w.log.Error("Unable to fetch latest block", "err", err)
 		return false
@@ -145,7 +145,7 @@ func (w *writer) createErc721Proposal(m msg.Message) bool {
 	// The latestBlock Info is nolonger needed
 	// However it may be neccessary to keep which served as heartbeat check
 	// Capture latest block so we know where to watch from
-	latestBlock, err := w.conn.LatestBlock()
+	_, err := w.conn.LatestBlock()
 	if err != nil {
 		w.log.Error("Unable to fetch latest block", "err", err)
 		return false
@@ -185,7 +185,7 @@ func (w *writer) createGenericDepositProposal(m msg.Message) bool {
 	// The latestBlock Info is nolonger needed
 	// However it may be neccessary to keep which served as heartbeat check
 	// Capture latest block so when know where to watch from
-	latestBlock, err := w.conn.LatestBlock()
+	_, err := w.conn.LatestBlock()
 	if err != nil {
 		w.log.Error("Unable to fetch latest block", "err", err)
 		return false
