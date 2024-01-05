@@ -16,6 +16,8 @@ import (
 
 const DefaultGasLimit = 6721975
 const DefaultGasPrice = 20000000000
+const DefaultGasFeeCap = 60000000000 // 60 GWEI
+const DefaultGasTipCap = 5000000000 // 5 GWEI
 const DefaultBlockConfirmations = 10
 const DefaultGasMultiplier = 1
 
@@ -75,8 +77,8 @@ func parseChainConfig(chainCfg *core.ChainConfig) (*Config, error) {
 		genericHandlerContract: utils.ZeroAddress,
 		gasLimit:               big.NewInt(DefaultGasLimit),
 		maxGasPrice:            big.NewInt(DefaultGasPrice),
-		gasFeeCap:              big.NewInt(DefaultGasPrice), 
-		gasTipCap:              big.NewInt(DefaultGasPrice),
+		gasFeeCap:              big.NewInt(DefaultGasFeeCap), 
+		gasTipCap:              big.NewInt(DefaultGasTipCap),
 		gasMultiplier:          big.NewFloat(DefaultGasMultiplier),
 		http:                   false,
 		startBlock:             big.NewInt(0),
