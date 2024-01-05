@@ -105,6 +105,7 @@ func GetConfig(ctx *cli.Context) (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
+	log.Debug("Config loaded", fig)
 	return &fig, nil
 }
 

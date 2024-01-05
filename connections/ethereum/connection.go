@@ -29,6 +29,8 @@ type Connection struct {
 	gasLimit      *big.Int
 	maxGasPrice   *big.Int
 	gasMultiplier *big.Float
+	gasFeeCap     *big.Int 
+	gasTipCap     *big.Int
 	conn          *ethclient.Client
 	// signer    ethtypes.Signer
 	opts      *bind.TransactOpts
@@ -41,7 +43,7 @@ type Connection struct {
 }
 
 // NewConnection returns an uninitialized connection, must call Connection.Connect() before using.
-func NewConnection(endpoint string, http bool, kp *secp256k1.Keypair, log log15.Logger, gasLimit, gasPrice *big.Int, gasMultiplier *big.Float) *Connection {
+func NewConnection(endpoint string, http bool, kp *secp256k1.Keypair, log log15.Logger, gasLimit, gasPrice *big.Int, gasMultiplier *big.Float, gasFeeCap *big.Int, gasTipCap *big.Int) *Connection {
 	return &Connection{
 		endpoint:      endpoint,
 		http:          http,
@@ -49,6 +51,8 @@ func NewConnection(endpoint string, http bool, kp *secp256k1.Keypair, log log15.
 		gasLimit:      gasLimit,
 		maxGasPrice:   gasPrice,
 		gasMultiplier: gasMultiplier,
+		gasFeeCap:     gasFeeCap, 
+		gasTipCap:     gasTipCap,
 		log:           log,
 		stop:          make(chan int),
 	}
@@ -71,7 +75,7 @@ func (c *Connection) Connect() error {
 	c.conn = ethclient.NewClient(rpcClient)
 
 	// Construct tx opts, call opts, and nonce mechanism
-	opts, _, err := c.newTransactOpts(big.NewInt(0), c.gasLimit, c.maxGasPrice)
+	opts, _, err := c.newTransactOpts(big.NewInt(0), c.gasFeeCap, c.gasTipCap)
 	if err != nil {
 		return err
 	}
@@ -107,7 +111,7 @@ func (c *Connection) Connect() error {
 // }
 
 // newTransactOpts builds the TransactOpts for the connection's keypair.
-func (c *Connection) newTransactOpts(value, gasLimit, gasPrice *big.Int) (*bind.TransactOpts, uint64, error) {
+func (c *Connection) newTransactOpts(value, gasFeeCap, gasTipCap *big.Int) (*bind.TransactOpts, uint64, error) {
 	privateKey := c.kp.PrivateKey()
 	address := ethcrypto.PubkeyToAddress(privateKey.PublicKey)
 
@@ -128,9 +132,9 @@ func (c *Connection) newTransactOpts(value, gasLimit, gasPrice *big.Int) (*bind.
 
 	auth.Nonce = big.NewInt(int64(nonce))
 	auth.Value = value
-	auth.GasLimit = uint64(gasLimit.Int64())
-	auth.GasPrice = gasPrice
 	auth.Context = context.Background()
+	auth.GasFeeCap = gasFeeCap
+	auth.GasTipCap = gasTipCap
 
 	return auth, nonce, nil
 }
@@ -190,12 +194,6 @@ func multiplyGasPrice(gasEstimate *big.Int, gasMultiplier *big.Float) *big.Int {
 // and gas price.
 func (c *Connection) LockAndUpdateOpts() error {
 	c.optsLock.Lock()
-
-	gasPrice, err := c.SafeEstimateGas(context.TODO())
-	if err != nil {
-		return err
-	}
-	c.opts.GasPrice = gasPrice
 
 	nonce, err := c.conn.PendingNonceAt(context.Background(), c.opts.From)
 	if err != nil {
