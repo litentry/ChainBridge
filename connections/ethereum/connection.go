@@ -75,7 +75,7 @@ func (c *Connection) Connect() error {
 	c.conn = ethclient.NewClient(rpcClient)
 
 	// Construct tx opts, call opts, and nonce mechanism
-	opts, _, err := c.newTransactOpts(big.NewInt(0), c.gasFeeCap, c.gasTipCap)
+	opts, _, err := c.newTransactOpts(big.NewInt(0), c.gasFeeCap, c.gasTipCap, c.gasLimit)
 	if err != nil {
 		return err
 	}
@@ -111,7 +111,7 @@ func (c *Connection) Connect() error {
 // }
 
 // newTransactOpts builds the TransactOpts for the connection's keypair.
-func (c *Connection) newTransactOpts(value, gasFeeCap, gasTipCap *big.Int) (*bind.TransactOpts, uint64, error) {
+func (c *Connection) newTransactOpts(value, gasFeeCap, gasTipCap, gasLimit *big.Int) (*bind.TransactOpts, uint64, error) {
 	privateKey := c.kp.PrivateKey()
 	address := ethcrypto.PubkeyToAddress(privateKey.PublicKey)
 
@@ -133,6 +133,7 @@ func (c *Connection) newTransactOpts(value, gasFeeCap, gasTipCap *big.Int) (*bin
 	auth.Nonce = big.NewInt(int64(nonce))
 	auth.Value = value
 	auth.Context = context.Background()
+	auth.GasLimit = uint64(gasLimit.Int64())
 	auth.GasFeeCap = gasFeeCap
 	auth.GasTipCap = gasTipCap
 
