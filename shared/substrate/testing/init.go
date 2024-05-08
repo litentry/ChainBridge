@@ -7,12 +7,12 @@ import (
 	"fmt"
 	"testing"
 
-	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
+	utils "github.com/litentry/ChainBridge/shared/substrate"
 )
 
-// WARNING: THIS METHOD IS UNSAFE AND MAY PANIC
+// EnsureInitializedChain WARNING: THIS METHOD IS UNSAFE AND MAY PANIC
 func EnsureInitializedChain(t *testing.T, client *utils.Client, relayers []types.AccountID, chains []msg.ChainId, resources map[msg.ResourceId]utils.Method, threshold uint32) {
 	var count types.U32
 	_, err := utils.QueryStorage(client, utils.BridgeStoragePrefix, "RelayerCount", nil, nil, &count)

@@ -22,14 +22,11 @@ package ethereum
 
 import (
 	"fmt"
+	"github.com/Phala-Network/chainbridge-utils/crypto"
 	"math/big"
+	"os"
 
 	"github.com/ChainSafe/log15"
-	bridge "github.com/Phala-Network/ChainBridge/bindings/Bridge"
-	erc20Handler "github.com/Phala-Network/ChainBridge/bindings/ERC20Handler"
-	erc721Handler "github.com/Phala-Network/ChainBridge/bindings/ERC721Handler"
-	"github.com/Phala-Network/ChainBridge/bindings/GenericHandler"
-	connection "github.com/Phala-Network/ChainBridge/connections/ethereum"
 	"github.com/Phala-Network/chainbridge-utils/blockstore"
 	"github.com/Phala-Network/chainbridge-utils/core"
 	"github.com/Phala-Network/chainbridge-utils/crypto/secp256k1"
@@ -39,6 +36,11 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
+	bridge "github.com/litentry/ChainBridge/bindings/Bridge"
+	erc20Handler "github.com/litentry/ChainBridge/bindings/ERC20Handler"
+	erc721Handler "github.com/litentry/ChainBridge/bindings/ERC721Handler"
+	"github.com/litentry/ChainBridge/bindings/GenericHandler"
+	connection "github.com/litentry/ChainBridge/connections/ethereum"
 )
 
 var _ core.Chain = &Chain{}
@@ -52,8 +54,6 @@ type Connection interface {
 	CallOpts() *bind.CallOpts
 	LockAndUpdateOpts() error
 	UnlockOpts()
-	LockAndIncreaseNonce()
-	UnlockNonce()
 	Client() *ethclient.Client
 	EnsureHasBytecode(address common.Address) error
 	LatestBlock() (*big.Int, error)
@@ -96,8 +96,13 @@ func InitializeChain(chainCfg *core.ChainConfig, logger log15.Logger, sysErr cha
 	if err != nil {
 		return nil, err
 	}
-
-	kpI, err := keystore.KeypairFromAddress(cfg.from, keystore.EthChain, cfg.keystorePath, chainCfg.Insecure)
+	var kpI crypto.Keypair
+	if stage := os.Getenv("STAGE"); stage == "dev" {
+		path := fmt.Sprintf("%s/%s.key", cfg.keystorePath, cfg.from)
+		kpI, err = keystore.ReadFromFileAndDecrypt(path, []byte(""), "secp256k1")
+	} else {
+		kpI, err = keystore.KeypairFromAddress(cfg.from, keystore.EthChain, cfg.keystorePath, chainCfg.Insecure)
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -109,7 +114,7 @@ func InitializeChain(chainCfg *core.ChainConfig, logger log15.Logger, sysErr cha
 	}
 
 	stop := make(chan int)
-	conn := connection.NewConnection(cfg.endpoint, cfg.http, kp, logger, cfg.gasLimit, cfg.maxGasPrice, cfg.gasMultiplier)
+	conn := connection.NewConnection(cfg.endpoint, cfg.http, kp, logger, cfg.gasLimit, cfg.maxGasPrice, cfg.gasMultiplier, cfg.gasFeeCap, cfg.gasTipCap)
 	err = conn.Connect()
 	if err != nil {
 		return nil, err

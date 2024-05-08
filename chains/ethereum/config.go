@@ -8,14 +8,16 @@ import (
 	"fmt"
 	"math/big"
 
-	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
 	"github.com/Phala-Network/chainbridge-utils/core"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ethereum/go-ethereum/common"
+	utils "github.com/litentry/ChainBridge/shared/ethereum"
 )
 
 const DefaultGasLimit = 6721975
 const DefaultGasPrice = 20000000000
+const DefaultGasFeeCap = 60000000000 // 60 GWEI
+const DefaultGasTipCap = 5000000000 // 5 GWEI
 const DefaultBlockConfirmations = 10
 const DefaultGasMultiplier = 1
 
@@ -27,6 +29,8 @@ var (
 	GenericHandlerOpt     = "genericHandler"
 	MaxGasPriceOpt        = "maxGasPrice"
 	GasLimitOpt           = "gasLimit"
+	GasFeeCapOpt          = "gasFeeCap"
+	GasTipCapOpt          = "gasTipCap"
 	GasMultiplier         = "gasMultiplier"
 	HttpOpt               = "http"
 	StartBlockOpt         = "startBlock"
@@ -48,6 +52,8 @@ type Config struct {
 	genericHandlerContract common.Address
 	gasLimit               *big.Int
 	maxGasPrice            *big.Int
+	gasFeeCap              *big.Int
+	gasTipCap              *big.Int
 	gasMultiplier          *big.Float
 	http                   bool // Config for type of connection
 	startBlock             *big.Int
@@ -71,6 +77,8 @@ func parseChainConfig(chainCfg *core.ChainConfig) (*Config, error) {
 		genericHandlerContract: utils.ZeroAddress,
 		gasLimit:               big.NewInt(DefaultGasLimit),
 		maxGasPrice:            big.NewInt(DefaultGasPrice),
+		gasFeeCap:              big.NewInt(DefaultGasFeeCap), 
+		gasTipCap:              big.NewInt(DefaultGasTipCap),
 		gasMultiplier:          big.NewFloat(DefaultGasMultiplier),
 		http:                   false,
 		startBlock:             big.NewInt(0),
@@ -101,6 +109,28 @@ func parseChainConfig(chainCfg *core.ChainConfig) (*Config, error) {
 			delete(chainCfg.Opts, MaxGasPriceOpt)
 		} else {
 			return nil, errors.New("unable to parse max gas price")
+		}
+	}
+
+	if gasFeeCap, ok := chainCfg.Opts[GasFeeCapOpt]; ok {
+		price := big.NewInt(0)
+		_, pass := price.SetString(gasFeeCap, 10)
+		if pass {
+			config.gasFeeCap = price
+			delete(chainCfg.Opts, GasFeeCapOpt)
+		} else {
+			return nil, errors.New("unable to parse gas fee cap")
+		}
+	}
+
+	if gasTipCap, ok := chainCfg.Opts[GasTipCapOpt]; ok {
+		price := big.NewInt(0)
+		_, pass := price.SetString(gasTipCap, 10)
+		if pass {
+			config.gasTipCap = price
+			delete(chainCfg.Opts, GasTipCapOpt)
+		} else {
+			return nil, errors.New("unable to parse gas tip cap")
 		}
 	}
 

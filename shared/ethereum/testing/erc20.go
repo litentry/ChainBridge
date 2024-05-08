@@ -7,10 +7,10 @@ import (
 	"math/big"
 	"testing"
 
-	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
-	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"
+	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ethereum/go-ethereum/common"
+	utils "github.com/litentry/ChainBridge/shared/ethereum"
 )
 
 func DeployMintApproveErc20(t *testing.T, client *utils.Client, erc20Handler common.Address, amount *big.Int) common.Address {
@@ -55,12 +55,12 @@ func Erc20AssertBalance(t *testing.T, client *utils.Client, amount *big.Int, erc
 	log15.Info("Asserted balance", "account", account, "balance", actual, "erc20Contract", erc20Contract.Hex())
 }
 
-func FundErc20Handler(t *testing.T, client *utils.Client, handlerAddress, erc20Address common.Address, amount *big.Int) {
-	err := utils.FundErc20Handler(client, handlerAddress, erc20Address, amount)
-	if err != nil {
-		t.Fatal(err)
-	}
-}
+//func FundErc20Handler(t *testing.T, client *utils.Client, handlerAddress, erc20Address common.Address, amount *big.Int) {
+//	err := utils.FundErc20Handler(client, handlerAddress, erc20Address, amount)
+//	if err != nil {
+//		t.Fatal(err)
+//	}
+//}
 
 func Erc20BalanceOf(t *testing.T, client *utils.Client, erc20Contract, acct common.Address) *big.Int {
 	balance, err := utils.Erc20GetBalance(client, erc20Contract, acct)

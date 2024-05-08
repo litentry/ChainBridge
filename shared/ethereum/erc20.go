@@ -6,10 +6,10 @@ package utils
 import (
 	"math/big"
 
-	"github.com/Phala-Network/ChainBridge/bindings/ERC20Handler"
-	ERC20 "github.com/Phala-Network/ChainBridge/bindings/ERC20PresetMinterPauser"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/litentry/ChainBridge/bindings/ERC20Handler"
+	ERC20 "github.com/litentry/ChainBridge/bindings/ERC20PresetMinterPauser"
 )
 
 // DeployMintAndApprove deploys a new erc20 contract, mints to the deployer, and approves the erc20 handler to transfer those token.
@@ -151,19 +151,19 @@ func Erc20GetBalance(client *Client, erc20Contract, account common.Address) (*bi
 
 }
 
-func FundErc20Handler(client *Client, handlerAddress, erc20Address common.Address, amount *big.Int) error {
-	err := Erc20Approve(client, erc20Address, handlerAddress, amount)
-	if err != nil {
-		return err
-	}
+// func FundErc20Handler(client *Client, handlerAddress, erc20Address common.Address, amount *big.Int) error {
+// 	err := Erc20Approve(client, erc20Address, handlerAddress, amount)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	_, err = ERC20Handler.NewERC20Handler(handlerAddress, client.Client)
-	if err != nil {
-		return err
-	}
+// 	_, err = ERC20Handler.NewERC20Handler(handlerAddress, client.Client)
+// 	if err != nil {
+// 		return err
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
 func Erc20AddMinter(client *Client, erc20Contract, handler common.Address) error {
 	err := client.LockNonceAndUpdate()

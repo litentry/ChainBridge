@@ -7,13 +7,13 @@ import (
 	"context"
 	"math/big"
 
-	"github.com/Phala-Network/ChainBridge/bindings/GenericHandler"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/litentry/ChainBridge/bindings/GenericHandler"
 
-	bridge "github.com/Phala-Network/ChainBridge/bindings/Bridge"
-	erc20Handler "github.com/Phala-Network/ChainBridge/bindings/ERC20Handler"
-	erc721Handler "github.com/Phala-Network/ChainBridge/bindings/ERC721Handler"
 	"github.com/Phala-Network/chainbridge-utils/keystore"
+	bridge "github.com/litentry/ChainBridge/bindings/Bridge"
+	erc20Handler "github.com/litentry/ChainBridge/bindings/ERC20Handler"
+	erc721Handler "github.com/litentry/ChainBridge/bindings/ERC721Handler"
 )
 
 var (
