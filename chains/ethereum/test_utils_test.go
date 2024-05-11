@@ -47,6 +47,8 @@ func createConfig(name string, startBlock *big.Int, contracts *utils.DeployedCon
 		gasLimit:               big.NewInt(DefaultGasLimit),
 		maxGasPrice:            big.NewInt(DefaultGasPrice),
 		gasMultiplier:          big.NewFloat(DefaultGasMultiplier),
+		gasFeeCap:              big.NewInt(DefaultGasFeeCap),
+		gasTipCap:              big.NewInt(DefaultGasTipCap),
 		http:                   false,
 		startBlock:             startBlock,
 		blockConfirmations:     big.NewInt(3),
@@ -70,7 +72,7 @@ func newTestLogger(name string) log15.Logger {
 
 func newLocalConnection(t *testing.T, cfg *Config) *connection.Connection {
 	kp := keystore.TestKeyRing.EthereumKeys[cfg.from]
-	conn := connection.NewConnection(TestEndpoint, false, kp, TestLogger, big.NewInt(DefaultGasLimit), big.NewInt(DefaultGasPrice), big.NewFloat(DefaultGasMultiplier))
+	conn := connection.NewConnection(TestEndpoint, false, kp, TestLogger, big.NewInt(DefaultGasLimit), big.NewInt(DefaultGasPrice), big.NewFloat(DefaultGasMultiplier), big.NewInt(DefaultGasFeeCap), big.NewInt(DefaultGasTipCap))
 	err := conn.Connect()
 	if err != nil {
 		t.Fatal(err)

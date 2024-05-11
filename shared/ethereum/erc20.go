@@ -151,19 +151,30 @@ func Erc20GetBalance(client *Client, erc20Contract, account common.Address) (*bi
 
 }
 
-// func FundErc20Handler(client *Client, handlerAddress, erc20Address common.Address, amount *big.Int) error {
-// 	err := Erc20Approve(client, erc20Address, handlerAddress, amount)
-// 	if err != nil {
-// 		return err
-// 	}
+func FundErc20Handler(client *Client, handlerAddress, erc20Address common.Address, amount *big.Int) error {
+	err := Erc20Approve(client, erc20Address, handlerAddress, amount)
+	if err != nil {
+		return err
+	}
 
-// 	_, err = ERC20Handler.NewERC20Handler(handlerAddress, client.Client)
-// 	if err != nil {
-// 		return err
-// 	}
+	instance, err := ERC20Handler.NewERC20Handler(handlerAddress, client.Client)
+	if err != nil {
+		return err
+	}
 
-// 	return nil
-// }
+	client.Opts.Nonce = client.Opts.Nonce.Add(client.Opts.Nonce, big.NewInt(1))
+	tx, err := instance.FundERC20(client.Opts, erc20Address, client.Opts.From, amount)
+	if err != nil {
+		return err
+	}
+
+	err = WaitForTx(client, tx)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
 
 func Erc20AddMinter(client *Client, erc20Contract, handler common.Address) error {
 	err := client.LockNonceAndUpdate()

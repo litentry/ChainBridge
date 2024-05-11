@@ -26,12 +26,13 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
+	_ = abi.ConvertType
 )
 
 // ThreeArgumentsMetaData contains all meta data concerning the ThreeArguments contract.
 var ThreeArgumentsMetaData = &bind.MetaData{
-	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"ThreeArgumentsCalled\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"threeArguments\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
-	Bin: "0x608060405234801561001057600080fd5b50610176806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c80639280b90514610030575b600080fd5b6100c06004803603606081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184600183028401116401000000008311171561009757600080fd5b9091929391929390803560000b90602001909291908035151590602001909291905050506100c2565b005b7fd589183661fa75f94e2db32f4eb7ebb50f4154c160e15eb43f772a46f360a3a88484848460405180806020018460000b815260200183151581526020018281038252868682818152602001925080828437600081840152601f19601f8201169050808301925050509550505050505060405180910390a15050505056fea264697066735822122015834af79ae1f3f50ea747eb67de7642f9f7de4b4c28d7b35a7f1290824af20864736f6c63430007000033",
+	ABI: "[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"ThreeArgumentsCalled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"argumentOne\",\"type\":\"string\"},{\"internalType\":\"int8\",\"name\":\"argumentTwo\",\"type\":\"int8\"},{\"internalType\":\"bool\",\"name\":\"argumentThree\",\"type\":\"bool\"}],\"name\":\"threeArguments\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	Bin: "0x608060405234801561001057600080fd5b5060008060006101000a81548160ff0219169083151502179055506106088061003a6000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c80633f4ba83a146100515780635c975abb1461005b5780638456cb59146100795780639280b90514610083575b600080fd5b61005961009f565b005b6100636100a9565b604051610070919061028e565b60405180910390f35b6100816100bf565b005b61009d6004803603810190610098919061037d565b6100c9565b005b6100a7610114565b565b60008060009054906101000a900460ff16905090565b6100c7610176565b565b6100d16101d8565b7fd589183661fa75f94e2db32f4eb7ebb50f4154c160e15eb43f772a46f360a3a884848484604051610106949392919061045e565b60405180910390a150505050565b61011c610222565b60008060006101000a81548160ff0219169083151502179055507f5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa61015f61026b565b60405161016c91906104df565b60405180910390a1565b61017e6101d8565b60016000806101000a81548160ff0219169083151502179055507f62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a2586101c161026b565b6040516101ce91906104df565b60405180910390a1565b6101e06100a9565b15610220576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161021790610546565b60405180910390fd5b565b61022a6100a9565b610269576040517f08c379a0000000000000000000000000000000000000000000000000000000008152600401610260906105b2565b60405180910390fd5b565b600033905090565b60008115159050919050565b61028881610273565b82525050565b60006020820190506102a3600083018461027f565b92915050565b600080fd5b600080fd5b600080fd5b600080fd5b600080fd5b60008083601f8401126102d8576102d76102b3565b5b8235905067ffffffffffffffff8111156102f5576102f46102b8565b5b602083019150836001820283011115610311576103106102bd565b5b9250929050565b60008160000b9050919050565b61032e81610318565b811461033957600080fd5b50565b60008135905061034b81610325565b92915050565b61035a81610273565b811461036557600080fd5b50565b60008135905061037781610351565b92915050565b60008060008060608587031215610397576103966102a9565b5b600085013567ffffffffffffffff8111156103b5576103b46102ae565b5b6103c1878288016102c2565b945094505060206103d48782880161033c565b92505060406103e587828801610368565b91505092959194509250565b600082825260208201905092915050565b82818337600083830152505050565b6000601f19601f8301169050919050565b600061042e83856103f1565b935061043b838584610402565b61044483610411565b840190509392505050565b61045881610318565b82525050565b60006060820190508181036000830152610479818688610422565b9050610488602083018561044f565b610495604083018461027f565b95945050505050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006104c98261049e565b9050919050565b6104d9816104be565b82525050565b60006020820190506104f460008301846104d0565b92915050565b7f5061757361626c653a2070617573656400000000000000000000000000000000600082015250565b60006105306010836103f1565b915061053b826104fa565b602082019050919050565b6000602082019050818103600083015261055f81610523565b9050919050565b7f5061757361626c653a206e6f7420706175736564000000000000000000000000600082015250565b600061059c6014836103f1565b91506105a782610566565b602082019050919050565b600060208201905081810360008301526105cb8161058f565b905091905056fea2646970667358221220f3001dcc7483a78339833b987fb8be87dfad668984cd74a624eabfa86f4e76e764736f6c63430008130033",
 }
 
 // ThreeArgumentsABI is the input ABI used to generate the binding from.
@@ -156,11 +157,11 @@ func NewThreeArgumentsFilterer(address common.Address, filterer bind.ContractFil
 
 // bindThreeArguments binds a generic wrapper to an already deployed contract.
 func bindThreeArguments(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(ThreeArgumentsABI))
+	parsed, err := ThreeArgumentsMetaData.GetAbi()
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and
@@ -201,6 +202,58 @@ func (_ThreeArguments *ThreeArgumentsTransactorRaw) Transact(opts *bind.Transact
 	return _ThreeArguments.Contract.contract.Transact(opts, method, params...)
 }
 
+// Paused is a free data retrieval call binding the contract method 0x5c975abb.
+//
+// Solidity: function paused() view returns(bool)
+func (_ThreeArguments *ThreeArgumentsCaller) Paused(opts *bind.CallOpts) (bool, error) {
+	var out []interface{}
+	err := _ThreeArguments.contract.Call(opts, &out, "paused")
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// Paused is a free data retrieval call binding the contract method 0x5c975abb.
+//
+// Solidity: function paused() view returns(bool)
+func (_ThreeArguments *ThreeArgumentsSession) Paused() (bool, error) {
+	return _ThreeArguments.Contract.Paused(&_ThreeArguments.CallOpts)
+}
+
+// Paused is a free data retrieval call binding the contract method 0x5c975abb.
+//
+// Solidity: function paused() view returns(bool)
+func (_ThreeArguments *ThreeArgumentsCallerSession) Paused() (bool, error) {
+	return _ThreeArguments.Contract.Paused(&_ThreeArguments.CallOpts)
+}
+
+// Pause is a paid mutator transaction binding the contract method 0x8456cb59.
+//
+// Solidity: function pause() returns()
+func (_ThreeArguments *ThreeArgumentsTransactor) Pause(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ThreeArguments.contract.Transact(opts, "pause")
+}
+
+// Pause is a paid mutator transaction binding the contract method 0x8456cb59.
+//
+// Solidity: function pause() returns()
+func (_ThreeArguments *ThreeArgumentsSession) Pause() (*types.Transaction, error) {
+	return _ThreeArguments.Contract.Pause(&_ThreeArguments.TransactOpts)
+}
+
+// Pause is a paid mutator transaction binding the contract method 0x8456cb59.
+//
+// Solidity: function pause() returns()
+func (_ThreeArguments *ThreeArgumentsTransactorSession) Pause() (*types.Transaction, error) {
+	return _ThreeArguments.Contract.Pause(&_ThreeArguments.TransactOpts)
+}
+
 // ThreeArguments is a paid mutator transaction binding the contract method 0x9280b905.
 //
 // Solidity: function threeArguments(string argumentOne, int8 argumentTwo, bool argumentThree) returns()
@@ -220,6 +273,161 @@ func (_ThreeArguments *ThreeArgumentsSession) ThreeArguments(argumentOne string,
 // Solidity: function threeArguments(string argumentOne, int8 argumentTwo, bool argumentThree) returns()
 func (_ThreeArguments *ThreeArgumentsTransactorSession) ThreeArguments(argumentOne string, argumentTwo int8, argumentThree bool) (*types.Transaction, error) {
 	return _ThreeArguments.Contract.ThreeArguments(&_ThreeArguments.TransactOpts, argumentOne, argumentTwo, argumentThree)
+}
+
+// Unpause is a paid mutator transaction binding the contract method 0x3f4ba83a.
+//
+// Solidity: function unpause() returns()
+func (_ThreeArguments *ThreeArgumentsTransactor) Unpause(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ThreeArguments.contract.Transact(opts, "unpause")
+}
+
+// Unpause is a paid mutator transaction binding the contract method 0x3f4ba83a.
+//
+// Solidity: function unpause() returns()
+func (_ThreeArguments *ThreeArgumentsSession) Unpause() (*types.Transaction, error) {
+	return _ThreeArguments.Contract.Unpause(&_ThreeArguments.TransactOpts)
+}
+
+// Unpause is a paid mutator transaction binding the contract method 0x3f4ba83a.
+//
+// Solidity: function unpause() returns()
+func (_ThreeArguments *ThreeArgumentsTransactorSession) Unpause() (*types.Transaction, error) {
+	return _ThreeArguments.Contract.Unpause(&_ThreeArguments.TransactOpts)
+}
+
+// ThreeArgumentsPausedIterator is returned from FilterPaused and is used to iterate over the raw logs and unpacked data for Paused events raised by the ThreeArguments contract.
+type ThreeArgumentsPausedIterator struct {
+	Event *ThreeArgumentsPaused // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ThreeArgumentsPausedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ThreeArgumentsPaused)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ThreeArgumentsPaused)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ThreeArgumentsPausedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ThreeArgumentsPausedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ThreeArgumentsPaused represents a Paused event raised by the ThreeArguments contract.
+type ThreeArgumentsPaused struct {
+	Account common.Address
+	Raw     types.Log // Blockchain specific contextual infos
+}
+
+// FilterPaused is a free log retrieval operation binding the contract event 0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258.
+//
+// Solidity: event Paused(address account)
+func (_ThreeArguments *ThreeArgumentsFilterer) FilterPaused(opts *bind.FilterOpts) (*ThreeArgumentsPausedIterator, error) {
+
+	logs, sub, err := _ThreeArguments.contract.FilterLogs(opts, "Paused")
+	if err != nil {
+		return nil, err
+	}
+	return &ThreeArgumentsPausedIterator{contract: _ThreeArguments.contract, event: "Paused", logs: logs, sub: sub}, nil
+}
+
+// WatchPaused is a free log subscription operation binding the contract event 0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258.
+//
+// Solidity: event Paused(address account)
+func (_ThreeArguments *ThreeArgumentsFilterer) WatchPaused(opts *bind.WatchOpts, sink chan<- *ThreeArgumentsPaused) (event.Subscription, error) {
+
+	logs, sub, err := _ThreeArguments.contract.WatchLogs(opts, "Paused")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ThreeArgumentsPaused)
+				if err := _ThreeArguments.contract.UnpackLog(event, "Paused", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParsePaused is a log parse operation binding the contract event 0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258.
+//
+// Solidity: event Paused(address account)
+func (_ThreeArguments *ThreeArgumentsFilterer) ParsePaused(log types.Log) (*ThreeArgumentsPaused, error) {
+	event := new(ThreeArgumentsPaused)
+	if err := _ThreeArguments.contract.UnpackLog(event, "Paused", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
 }
 
 // ThreeArgumentsThreeArgumentsCalledIterator is returned from FilterThreeArgumentsCalled and is used to iterate over the raw logs and unpacked data for ThreeArgumentsCalled events raised by the ThreeArguments contract.
@@ -352,6 +560,140 @@ func (_ThreeArguments *ThreeArgumentsFilterer) WatchThreeArgumentsCalled(opts *b
 func (_ThreeArguments *ThreeArgumentsFilterer) ParseThreeArgumentsCalled(log types.Log) (*ThreeArgumentsThreeArgumentsCalled, error) {
 	event := new(ThreeArgumentsThreeArgumentsCalled)
 	if err := _ThreeArguments.contract.UnpackLog(event, "ThreeArgumentsCalled", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// ThreeArgumentsUnpausedIterator is returned from FilterUnpaused and is used to iterate over the raw logs and unpacked data for Unpaused events raised by the ThreeArguments contract.
+type ThreeArgumentsUnpausedIterator struct {
+	Event *ThreeArgumentsUnpaused // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ThreeArgumentsUnpausedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ThreeArgumentsUnpaused)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ThreeArgumentsUnpaused)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ThreeArgumentsUnpausedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ThreeArgumentsUnpausedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ThreeArgumentsUnpaused represents a Unpaused event raised by the ThreeArguments contract.
+type ThreeArgumentsUnpaused struct {
+	Account common.Address
+	Raw     types.Log // Blockchain specific contextual infos
+}
+
+// FilterUnpaused is a free log retrieval operation binding the contract event 0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa.
+//
+// Solidity: event Unpaused(address account)
+func (_ThreeArguments *ThreeArgumentsFilterer) FilterUnpaused(opts *bind.FilterOpts) (*ThreeArgumentsUnpausedIterator, error) {
+
+	logs, sub, err := _ThreeArguments.contract.FilterLogs(opts, "Unpaused")
+	if err != nil {
+		return nil, err
+	}
+	return &ThreeArgumentsUnpausedIterator{contract: _ThreeArguments.contract, event: "Unpaused", logs: logs, sub: sub}, nil
+}
+
+// WatchUnpaused is a free log subscription operation binding the contract event 0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa.
+//
+// Solidity: event Unpaused(address account)
+func (_ThreeArguments *ThreeArgumentsFilterer) WatchUnpaused(opts *bind.WatchOpts, sink chan<- *ThreeArgumentsUnpaused) (event.Subscription, error) {
+
+	logs, sub, err := _ThreeArguments.contract.WatchLogs(opts, "Unpaused")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ThreeArgumentsUnpaused)
+				if err := _ThreeArguments.contract.UnpackLog(event, "Unpaused", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseUnpaused is a log parse operation binding the contract event 0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa.
+//
+// Solidity: event Unpaused(address account)
+func (_ThreeArguments *ThreeArgumentsFilterer) ParseUnpaused(log types.Log) (*ThreeArgumentsUnpaused, error) {
+	event := new(ThreeArgumentsUnpaused)
+	if err := _ThreeArguments.contract.UnpackLog(event, "Unpaused", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

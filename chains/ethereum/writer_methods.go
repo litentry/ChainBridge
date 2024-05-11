@@ -4,12 +4,9 @@
 package ethereum
 
 import (
-	"context"
 	"errors"
-	"math/big"
 	"time"
 
-	log "github.com/ChainSafe/log15"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	utils "github.com/litentry/ChainBridge/shared/ethereum"
 )
@@ -85,7 +82,7 @@ func (w *writer) shouldVote(m msg.Message, dataHash [32]byte) bool {
 }
 
 // createErc20Proposal creates an Erc20 proposal.
-// Returns true if the proposal is successfully created or is complete
+// Returns true if the proposal is successfully created or is complete or at least try executing done
 func (w *writer) createErc20Proposal(m msg.Message) bool {
 	w.log.Info("Creating erc20 proposal", "src", m.Source, "nonce", m.DepositNonce)
 
@@ -102,23 +99,13 @@ func (w *writer) createErc20Proposal(m msg.Message) bool {
 		}
 	}
 
-	// Capture latest block so when know where to watch from
-	latestBlock, err := w.conn.LatestBlock()
-	if err != nil {
-		w.log.Error("Unable to fetch latest block", "err", err)
-		return false
-	}
-
-	// watch for execution event
-	go w.watchThenExecute(m, data, dataHash, latestBlock)
-
-	w.voteProposal(m, dataHash)
+	w.voteProposal(m, dataHash, data)
 
 	return true
 }
 
 // createErc721Proposal creates an Erc721 proposal.
-// Returns true if the proposal is succesfully created or is complete
+// Returns true if the proposal is succesfully created or is complete or at least try executing done
 func (w *writer) createErc721Proposal(m msg.Message) bool {
 	w.log.Info("Creating erc721 proposal", "src", m.Source, "nonce", m.DepositNonce)
 
@@ -135,17 +122,7 @@ func (w *writer) createErc721Proposal(m msg.Message) bool {
 		}
 	}
 
-	// Capture latest block so we know where to watch from
-	latestBlock, err := w.conn.LatestBlock()
-	if err != nil {
-		w.log.Error("Unable to fetch latest block", "err", err)
-		return false
-	}
-
-	// watch for execution event
-	go w.watchThenExecute(m, data, dataHash, latestBlock)
-
-	w.voteProposal(m, dataHash)
+	w.voteProposal(m, dataHash, data)
 
 	return true
 }
@@ -170,80 +147,14 @@ func (w *writer) createGenericDepositProposal(m msg.Message) bool {
 		}
 	}
 
-	// Capture latest block so when know where to watch from
-	latestBlock, err := w.conn.LatestBlock()
-	if err != nil {
-		w.log.Error("Unable to fetch latest block", "err", err)
-		return false
-	}
-
-	// watch for execution event
-	go w.watchThenExecute(m, data, dataHash, latestBlock)
-
-	w.voteProposal(m, dataHash)
+	w.voteProposal(m, dataHash, data)
 
 	return true
 }
 
-// watchThenExecute watches for the latest block and executes once the matching finalized event is found
-func (w *writer) watchThenExecute(m msg.Message, data []byte, dataHash [32]byte, latestBlock *big.Int) {
-	w.log.Info("Watching for finalization event", "src", m.Source, "nonce", m.DepositNonce)
-
-	// watching for the latest block, querying and matching the finalized event will be retried up to ExecuteBlockWatchLimit times
-	for i := 0; i < ExecuteBlockWatchLimit; i++ {
-		select {
-		case <-w.stop:
-			return
-		default:
-			// watch for the lastest block, retry up to BlockRetryLimit times
-			for waitRetrys := 0; waitRetrys < BlockRetryLimit; waitRetrys++ {
-				err := w.conn.WaitForBlock(latestBlock, w.cfg.blockConfirmations)
-				if err != nil {
-					w.log.Error("Waiting for block failed", "err", err)
-					// Exit if retries exceeded
-					if waitRetrys+1 == BlockRetryLimit {
-						w.log.Error("Waiting for block retries exceeded, shutting down")
-						w.sysErr <- ErrFatalQuery
-						return
-					}
-				} else {
-					break
-				}
-			}
-
-			// query for logs
-			query := buildQuery(w.cfg.bridgeContract, utils.ProposalEvent, latestBlock, latestBlock)
-			evts, err := w.conn.Client().FilterLogs(context.Background(), query)
-			if err != nil {
-				w.log.Error("Failed to fetch logs", "err", err)
-				return
-			}
-
-			// execute the proposal once we find the matching finalized event
-			for _, evt := range evts {
-				sourceId := evt.Topics[1].Big().Uint64()
-				depositNonce := evt.Topics[2].Big().Uint64()
-				status := evt.Topics[3].Big().Uint64()
-
-				if m.Source == msg.ChainId(sourceId) &&
-					m.DepositNonce.Big().Uint64() == depositNonce &&
-					utils.IsFinalized(uint8(status)) {
-					w.executeProposal(m, data, dataHash)
-					return
-				} else {
-					w.log.Trace("Ignoring event", "src", sourceId, "nonce", depositNonce)
-				}
-			}
-			w.log.Trace("No finalization event found in current block", "block", latestBlock, "src", m.Source, "nonce", m.DepositNonce)
-			latestBlock = latestBlock.Add(latestBlock, big.NewInt(1))
-		}
-	}
-	log.Warn("Block watch limit exceeded, skipping execution", "source", m.Source, "dest", m.Destination, "nonce", m.DepositNonce)
-}
-
 // voteProposal submits a vote proposal
 // a vote proposal will try to be submitted up to the TxRetryLimit times
-func (w *writer) voteProposal(m msg.Message, dataHash [32]byte) {
+func (w *writer) voteProposal(m msg.Message, dataHash [32]byte, data []byte) {
 	for i := 0; i < TxRetryLimit; i++ {
 		select {
 		case <-w.stop:
@@ -260,7 +171,7 @@ func (w *writer) voteProposal(m msg.Message, dataHash [32]byte) {
 				uint8(m.Source),
 				uint64(m.DepositNonce),
 				m.ResourceId,
-				dataHash,
+				data,
 			)
 			w.conn.UnlockOpts()
 
