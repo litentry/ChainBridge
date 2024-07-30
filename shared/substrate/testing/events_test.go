@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/Phala-Network/ChainBridge/e2e/substrate"
-	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
 	gsrpc "github.com/Phala-Network/go-substrate-rpc-client/v3"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
+	"github.com/litentry/ChainBridge/e2e/substrate"
+	utils "github.com/litentry/ChainBridge/shared/substrate"
 )
 
 func TestChain_Events(t *testing.T) {

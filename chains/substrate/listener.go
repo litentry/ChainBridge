@@ -10,13 +10,13 @@ import (
 	"time"
 
 	"github.com/ChainSafe/log15"
-	"github.com/Phala-Network/ChainBridge/chains"
-	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
-	events "github.com/Phala-Network/chainbridge-substrate-events"
 	"github.com/Phala-Network/chainbridge-utils/blockstore"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
+	"github.com/litentry/ChainBridge/chains"
+	utils "github.com/litentry/ChainBridge/shared/substrate"
+	events "github.com/zhizming-zhong/chainbridge-substrate-events"
 )
 
 type listener struct {
@@ -60,6 +60,7 @@ func (l *listener) setRouter(r chains.Router) {
 
 // start creates the initial subscription for all events
 func (l *listener) start() error {
+	l.log.Debug("Starting listener...")
 	// Check whether latest is less than starting block
 	header, err := l.conn.api.RPC.Chain.GetHeaderLatest()
 	if err != nil {

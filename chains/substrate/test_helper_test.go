@@ -7,12 +7,12 @@ import (
 	"os"
 	"testing"
 
-	utils "github.com/Phala-Network/ChainBridge/shared/substrate"
+	"github.com/ChainSafe/log15"
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/ChainSafe/log15"
 	"github.com/Phala-Network/go-substrate-rpc-client/v3/types"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	utils "github.com/litentry/ChainBridge/shared/substrate"
 )
 
 const TestEndpoint = "ws://127.0.0.1:9944"
@@ -38,8 +38,8 @@ var relayers = []types.AccountID{
 var resources = map[msg.ResourceId]utils.Method{
 	// These are taken from the Polkadot JS UI (Chain State -> Constants)
 	msg.ResourceIdFromSlice(hexutil.MustDecode("0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00")): utils.ExampleTransferMethod,
-	msg.ResourceIdFromSlice(hexutil.MustDecode("0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501")): utils.ExampleMintErc721Method,
-	msg.ResourceIdFromSlice(hexutil.MustDecode("0x000000000000000000000000000000f44be64d2de895454c3467021928e55e01")): utils.ExampleRemarkMethod,
+	//msg.ResourceIdFromSlice(hexutil.MustDecode("0x000000000000000000000000000000e389d61c11e5fe32ec1735b3cd38c69501")): utils.ExampleMintErc721Method,
+	//msg.ResourceIdFromSlice(hexutil.MustDecode("0x000000000000000000000000000000f44be64d2de895454c3467021928e55e01")): utils.ExampleRemarkMethod,
 }
 
 const relayerThreshold = 2

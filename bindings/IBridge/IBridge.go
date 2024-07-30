@@ -4,6 +4,7 @@
 package IBridge
 
 import (
+	"errors"
 	"math/big"
 	"strings"
 
@@ -17,6 +18,7 @@ import (
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
+	_ = errors.New
 	_ = big.NewInt
 	_ = strings.NewReader
 	_ = ethereum.NotFound
@@ -24,10 +26,17 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
+	_ = abi.ConvertType
 )
 
+// IBridgeMetaData contains all meta data concerning the IBridge contract.
+var IBridgeMetaData = &bind.MetaData{
+	ABI: "[{\"inputs\":[],\"name\":\"_chainID\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+}
+
 // IBridgeABI is the input ABI used to generate the binding from.
-const IBridgeABI = "[{\"inputs\":[],\"name\":\"_chainID\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+// Deprecated: Use IBridgeMetaData.ABI instead.
+var IBridgeABI = IBridgeMetaData.ABI
 
 // IBridge is an auto generated Go binding around an Ethereum contract.
 type IBridge struct {
@@ -126,11 +135,11 @@ func NewIBridgeFilterer(address common.Address, filterer bind.ContractFilterer) 
 
 // bindIBridge binds a generic wrapper to an already deployed contract.
 func bindIBridge(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(IBridgeABI))
+	parsed, err := IBridgeMetaData.GetAbi()
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and

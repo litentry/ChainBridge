@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"math/big"
 
-	events "github.com/Phala-Network/chainbridge-substrate-events"
-	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ChainSafe/log15"
+	"github.com/Phala-Network/chainbridge-utils/msg"
+	events "github.com/zhizming-zhong/chainbridge-substrate-events"
 )
 
 type eventName string

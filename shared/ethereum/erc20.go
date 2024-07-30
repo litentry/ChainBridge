@@ -6,10 +6,10 @@ package utils
 import (
 	"math/big"
 
-	"github.com/Phala-Network/ChainBridge/bindings/ERC20Handler"
-	ERC20 "github.com/Phala-Network/ChainBridge/bindings/ERC20PresetMinterPauser"
 	"github.com/Phala-Network/chainbridge-utils/msg"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/litentry/ChainBridge/bindings/ERC20Handler"
+	ERC20 "github.com/litentry/ChainBridge/bindings/ERC20PresetMinterPauser"
 )
 
 // DeployMintAndApprove deploys a new erc20 contract, mints to the deployer, and approves the erc20 handler to transfer those token.
@@ -157,7 +157,18 @@ func FundErc20Handler(client *Client, handlerAddress, erc20Address common.Addres
 		return err
 	}
 
-	_, err = ERC20Handler.NewERC20Handler(handlerAddress, client.Client)
+	instance, err := ERC20Handler.NewERC20Handler(handlerAddress, client.Client)
+	if err != nil {
+		return err
+	}
+
+	client.Opts.Nonce = client.Opts.Nonce.Add(client.Opts.Nonce, big.NewInt(1))
+	tx, err := instance.FundERC20(client.Opts, erc20Address, client.Opts.From, amount)
+	if err != nil {
+		return err
+	}
+
+	err = WaitForTx(client, tx)
 	if err != nil {
 		return err
 	}

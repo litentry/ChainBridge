@@ -9,13 +9,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Phala-Network/ChainBridge/bindings/Bridge"
-	connection "github.com/Phala-Network/ChainBridge/connections/ethereum"
-	utils "github.com/Phala-Network/ChainBridge/shared/ethereum"
+	"github.com/ChainSafe/log15"
 	"github.com/Phala-Network/chainbridge-utils/keystore"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	"github.com/ChainSafe/log15"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/litentry/ChainBridge/bindings/Bridge"
+	connection "github.com/litentry/ChainBridge/connections/ethereum"
+	utils "github.com/litentry/ChainBridge/shared/ethereum"
 )
 
 const TestEndpoint = "ws://localhost:8545"
@@ -47,6 +47,8 @@ func createConfig(name string, startBlock *big.Int, contracts *utils.DeployedCon
 		gasLimit:               big.NewInt(DefaultGasLimit),
 		maxGasPrice:            big.NewInt(DefaultGasPrice),
 		gasMultiplier:          big.NewFloat(DefaultGasMultiplier),
+		gasFeeCap:              big.NewInt(DefaultGasFeeCap),
+		gasTipCap:              big.NewInt(DefaultGasTipCap),
 		http:                   false,
 		startBlock:             startBlock,
 		blockConfirmations:     big.NewInt(3),
@@ -70,7 +72,7 @@ func newTestLogger(name string) log15.Logger {
 
 func newLocalConnection(t *testing.T, cfg *Config) *connection.Connection {
 	kp := keystore.TestKeyRing.EthereumKeys[cfg.from]
-	conn := connection.NewConnection(TestEndpoint, false, kp, TestLogger, big.NewInt(DefaultGasLimit), big.NewInt(DefaultGasPrice), big.NewFloat(DefaultGasMultiplier))
+	conn := connection.NewConnection(TestEndpoint, false, kp, TestLogger, big.NewInt(DefaultGasLimit), big.NewInt(DefaultGasPrice), big.NewFloat(DefaultGasMultiplier), big.NewInt(DefaultGasFeeCap), big.NewInt(DefaultGasTipCap))
 	err := conn.Connect()
 	if err != nil {
 		t.Fatal(err)

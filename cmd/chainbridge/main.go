@@ -15,14 +15,14 @@ import (
 
 	"strconv"
 
-	"github.com/Phala-Network/ChainBridge/chains/ethereum"
-	"github.com/Phala-Network/ChainBridge/chains/substrate"
-	"github.com/Phala-Network/ChainBridge/config"
+	log "github.com/ChainSafe/log15"
 	"github.com/Phala-Network/chainbridge-utils/core"
 	"github.com/Phala-Network/chainbridge-utils/metrics/health"
 	metrics "github.com/Phala-Network/chainbridge-utils/metrics/types"
 	"github.com/Phala-Network/chainbridge-utils/msg"
-	log "github.com/ChainSafe/log15"
+	"github.com/litentry/ChainBridge/chains/ethereum"
+	"github.com/litentry/ChainBridge/chains/substrate"
+	"github.com/litentry/ChainBridge/config"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/urfave/cli/v2"
 )

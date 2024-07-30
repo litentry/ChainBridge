@@ -23,6 +23,8 @@ import (
 const DefaultGasLimit = 6721975
 const DefaultMaxGasPrice = 20000000000
 const DefaultGasMultiplier = 1
+const DefaultGasFeeCap = 60000000000
+const DefaultGasTipCap = 5000000000
 
 var ExpectedBlockTime = time.Second
 

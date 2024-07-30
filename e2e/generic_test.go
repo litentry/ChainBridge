@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"testing"
 
-	eth "github.com/Phala-Network/ChainBridge/e2e/ethereum"
-	sub "github.com/Phala-Network/ChainBridge/e2e/substrate"
-	ethtest "github.com/Phala-Network/ChainBridge/shared/ethereum/testing"
-	subtest "github.com/Phala-Network/ChainBridge/shared/substrate/testing"
 	log "github.com/ChainSafe/log15"
+	eth "github.com/litentry/ChainBridge/e2e/ethereum"
+	sub "github.com/litentry/ChainBridge/e2e/substrate"
+	ethtest "github.com/litentry/ChainBridge/shared/ethereum/testing"
+	subtest "github.com/litentry/ChainBridge/shared/substrate/testing"
 )
 
 func testSubstrateHashToGenericHandler(t *testing.T, ctx *testContext) {
