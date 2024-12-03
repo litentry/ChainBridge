@@ -29,6 +29,9 @@ var BlockRetryInterval = time.Second * 5
 var BlockRetryLimit = 5
 var ErrFatalPolling = errors.New("listener block polling failed")
 
+// Lower the query frequency when sync
+var SyncWaitInterval = time.Millisecond * 500
+
 type listener struct {
 	cfg                    Config
 	conn                   Connection
@@ -151,6 +154,8 @@ func (l *listener) pollBlocks() error {
 			// Goto next block and reset retry counter
 			currentBlock.Add(currentBlock, big.NewInt(1))
 			retry = BlockRetryLimit
+
+			time.Sleep(SyncWaitInterval)
 		}
 	}
 }

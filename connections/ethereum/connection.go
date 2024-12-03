@@ -29,7 +29,7 @@ type Connection struct {
 	gasLimit      *big.Int
 	maxGasPrice   *big.Int
 	gasMultiplier *big.Float
-	gasFeeCap     *big.Int 
+	gasFeeCap     *big.Int
 	gasTipCap     *big.Int
 	conn          *ethclient.Client
 	// signer    ethtypes.Signer
@@ -51,7 +51,7 @@ func NewConnection(endpoint string, http bool, kp *secp256k1.Keypair, log log15.
 		gasLimit:      gasLimit,
 		maxGasPrice:   gasPrice,
 		gasMultiplier: gasMultiplier,
-		gasFeeCap:     gasFeeCap, 
+		gasFeeCap:     gasFeeCap,
 		gasTipCap:     gasTipCap,
 		log:           log,
 		stop:          make(chan int),
